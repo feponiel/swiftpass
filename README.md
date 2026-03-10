@@ -6,10 +6,6 @@
 ### Client-facing endpoints
 
 #### Auth & Profile
-<details>
-  <summary><code>POST /register</code> Create an account</summary>
-  Future end-point diagram
-</details>
 
 <details>
   <summary><code>POST /login</code> Create a new session</summary>
