@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: swiftpass
+
+  profiles:
+    active: dev
