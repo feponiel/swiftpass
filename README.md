@@ -61,25 +61,29 @@
   Future end-point diagram
 </details>
 
-#### Subscriptions
+#### Registrations
 <details>
-  <summary><code>POST /events/:eventId/subscriptions</code> Register for an event</summary>
+  <summary><code>POST /events/:eventId/registrations</code> Register for an event</summary>
   Future end-point diagram
 </details>
 <details>
-  <summary><code>GET /events/:eventId/subscriptions?status={status}</code> List all event subscriptions, filtered by status or not</summary>
+  <summary><code>GET /events/:eventId/registrations?status={status}</code> List all event registrations, filtered by status or not</summary>
   Future end-point diagram
 </details>
 <details>
-  <summary><code>GET /subscriptions/me</code> Get your event subscriptions</summary>
+  <summary><code>GET /registrations/me</code> Get your event registrations</summary>
   Future end-point diagram
 </details>
 <details>
-  <summary><code>PATCH /subscriptions/:subscriptionId</code> Edit a specific event subscription</summary>
+  <summary><code>PATCH /registrations/:registrationId/cancel</code> Cancel a specific event registration</summary>
   Future end-point diagram
 </details>
 <details>
-  <summary><code>DELETE /subscriptions/:subscriptionId</code> Delete a specific event subscription</summary>
+  <summary><code>PATCH /registrations/:registrationId/refund</code> Mark a specific event registration as refunded</summary>
+  Future end-point diagram
+</details>
+<details>
+  <summary><code>DELETE /registrations/:registrationId</code> Delete a specific event registration</summary>
   Future end-point diagram
 </details>
 

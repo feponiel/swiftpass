@@ -1,0 +1,67 @@
+package com.feponiel.swiftpass.domain.business.entities;
+
+import java.time.Instant;
+import java.util.UUID;
+
+import com.feponiel.swiftpass.domain.business.valueobjects.Role;
+
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NonNull;
+
+@Getter
+public class User extends Entity {
+  private String providerId;
+  private String name;
+  private String email;
+  private String pictureUrl;
+  private Role role;
+  private Instant createdAt;
+  private Instant updatedAt;
+  private Instant editedAt;
+
+  @Builder
+  private User(
+    @NonNull UUID id,
+    @NonNull String providerId,
+    @NonNull String name,
+    @NonNull String email,
+    String pictureUrl,
+    Role role,
+    Instant createdAt,
+    Instant updatedAt,
+    Instant editedAt
+  ) {
+    super(id);
+    this.providerId = providerId;
+    this.name = name;
+    this.email = email;
+    this.pictureUrl = pictureUrl;
+    this.role = role != null ? role : Role.DEFAULT;
+    this.createdAt = createdAt != null ? createdAt : Instant.now();
+    this.updatedAt = updatedAt;
+    this.editedAt = editedAt;
+  }
+
+  protected void touch() {
+    this.updatedAt = Instant.now();
+  }
+
+  protected void markEdited() {
+    this.touch();
+
+    this.editedAt = Instant.now();
+  }
+
+  public void changeName(String newName) {
+    this.name = newName;
+    
+    this.markEdited();
+  }
+
+  public void updateRole(Role newRole) {
+    this.role = newRole;
+
+    this.touch();
+  }
+}
