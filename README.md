@@ -5,90 +5,31 @@
 
 ### Client-facing endpoints
 
-#### Auth & Profile
-
-<details>
-  <summary><code>POST /login</code> Create a new session</summary>
-  Future end-point diagram
-</details>
-
-<details>
-  <summary><code>GET /me</code> Get your profile info</summary>
-  Future end-point diagram
-</details>
-
-<details>
-  <summary><code>PATCH /me</code> Edit your profile info</summary>
-  Future end-point diagram
-</details>
-
-<details>
-  <summary><code>DELETE /me</code> Delete your account</summary>
-  Future end-point diagram
-</details>
+#### Profile, Account & Auth
+`GET /oauth2/authorization/google` Redirect you to Google login page  
+`POST /logout` End your current session  
+`GET /me` Get your profile info  
+`PATCH /me` Edit your profile info  
+`DELETE /me` Delete your account  
 
 #### Events & Tickets
-<details>
-  <summary><code>GET /events/:eventId</code> Get a specific event</summary>
-  Future end-point diagram
-</details>
-<details>
-  <summary><code>PATCH /events/:eventId</code> Edit a specific event</summary>
-  Future end-point diagram
-</details>
-<details>
-  <summary><code>DELETE /events/:eventId</code> Delete a specific event</summary>
-  Future end-point diagram
-</details>
-<details>
-  <summary><code>POST /events/:eventId/tickets</code> Create a new ticket</summary>
-  Future end-point diagram
-</details>
-<details>
-  <summary><code>GET /events/:eventId/tickets</code> List all tickets for an event</summary>
-  Future end-point diagram
-</details>
-<details>
-  <summary><code>GET /tickets/:ticketId</code> Get a specific ticket for an event</summary>
-  Future end-point diagram
-</details>
-<details>
-  <summary><code>PATCH /tickets/:ticketId</code> Edit a specific ticket for an event</summary>
-  Future end-point diagram
-</details>
-<details>
-  <summary><code>DELETE /tickets/:ticketId</code> Delete a specific ticket for an event</summary>
-  Future end-point diagram
-</details>
+`GET /events` List all events  
+`GET /events/:eventId` Get a specific event  
+`PATCH /events/:eventId` Edit a specific event  
+`DELETE /events/:eventId` Delete a specific event  
+`POST /events/:eventId/tickets` Create a new ticket  
+`GET /events/:eventId/tickets` List all tickets for an event  
+`GET /tickets/:ticketId` Get a specific ticket for an event  
+`PATCH /tickets/:ticketId` Edit a specific ticket for an event  
+`DELETE /tickets/:ticketId` Delete a specific ticket for an event  
 
 #### Registrations
-<details>
-  <summary><code>POST /events/:eventId/registrations</code> Register for an event</summary>
-  Future end-point diagram
-</details>
-<details>
-  <summary><code>GET /events/:eventId/registrations?status={status}</code> List all event registrations, filtered by status or not</summary>
-  Future end-point diagram
-</details>
-<details>
-  <summary><code>GET /registrations/me</code> Get your event registrations</summary>
-  Future end-point diagram
-</details>
-<details>
-  <summary><code>PATCH /registrations/:registrationId/cancel</code> Cancel a specific event registration</summary>
-  Future end-point diagram
-</details>
-<details>
-  <summary><code>PATCH /registrations/:registrationId/refund</code> Mark a specific event registration as refunded</summary>
-  Future end-point diagram
-</details>
-<details>
-  <summary><code>DELETE /registrations/:registrationId</code> Delete a specific event registration</summary>
-  Future end-point diagram
-</details>
+`POST /events/:eventId/registrations` Register for an event  
+`GET /events/:eventId/registrations?status={status}` List all event registrations, filtered by status or not  
+`GET /registrations/me` Get your event registrations  
+`PATCH /registrations/:registrationId/cancel` Cancel a specific event registration  
+`PATCH /registrations/:registrationId/refund` Mark a specific event registration as refunded  
+`DELETE /registrations/:registrationId` Delete a specific event registration  
 
 ### System integration endpoints
-<details>
-  <summary><code>POST /webhooks/stripe</code> Send payment event notifications (Stripe via webhook)</summary>
-  Future end-point diagram
-</details>
+`POST /webhooks/stripe` Send payment event notifications (Stripe via webhook)

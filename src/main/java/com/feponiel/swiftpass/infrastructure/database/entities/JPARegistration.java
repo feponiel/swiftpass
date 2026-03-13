@@ -7,7 +7,6 @@ import java.util.UUID;
 import com.feponiel.swiftpass.domain.business.valueobjects.PaymentStatus;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -27,19 +26,16 @@ public class JPARegistration {
   @Column(name = "id")
   private UUID id;
 
-  @EmbeddedId
   @Column(name = "registrant_id", nullable = false)
   private UUID registrantId;
 
-  @EmbeddedId
   @Column(name = "ticket_id", nullable = false)
   private UUID ticketId;
 
-  @EmbeddedId
   @Column(name = "event_id", nullable = false)
   private UUID eventId;
 
-  @Column(name = "holder_name", nullable = false)
+  @Column(name = "holder_name", nullable = false, length = 100)
   private String holderName;
 
   @Column(name = "payment_status", nullable = false)

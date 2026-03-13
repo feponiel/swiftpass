@@ -5,7 +5,6 @@ import java.time.Instant;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -23,14 +22,13 @@ public class JPATicket {
   @Column(name = "id")
   private UUID id;
 
-  @EmbeddedId
   @Column(name = "event_id", nullable = false)
   private UUID eventId;
 
-  @Column(name = "name", nullable = false)
+  @Column(name = "name", nullable = false, length = 100)
   private String name;
 
-  @Column(name = "description")
+  @Column(name = "description", length = 2_000)
   private String description;
 
   @Column(name = "price", nullable = false, precision = 10, scale = 2)

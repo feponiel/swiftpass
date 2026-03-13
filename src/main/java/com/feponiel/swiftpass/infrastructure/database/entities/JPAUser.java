@@ -27,7 +27,7 @@ public class JPAUser {
   @Column(name = "provider_id", nullable = false)
   private String providerId;
 
-  @Column(name = "name", nullable = false)
+  @Column(name = "name", nullable = false, length = 100)
   private String name;
 
   @Column(name = "email", nullable = false, unique = true)

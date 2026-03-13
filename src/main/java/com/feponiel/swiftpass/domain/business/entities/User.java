@@ -53,10 +53,26 @@ public class User extends Entity {
     this.editedAt = Instant.now();
   }
 
-  public void changeName(String newName) {
+  public User changeName(String newName) {
+    if (newName == null)
+      return this;
+
     this.name = newName;
     
     this.markEdited();
+
+    return this;
+  }
+
+  public User changePicture(String newPictureUrl) {
+    if (newPictureUrl == null)
+      return this;
+
+    this.pictureUrl = newPictureUrl;
+    
+    this.markEdited();
+
+    return this;
   }
 
   public void updateRole(Role newRole) {

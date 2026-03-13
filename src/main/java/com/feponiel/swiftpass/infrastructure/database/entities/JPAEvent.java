@@ -4,7 +4,6 @@ import java.time.Instant;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -22,14 +21,13 @@ public class JPAEvent {
   @Column(name = "id")
   private UUID id;
 
-  @EmbeddedId
   @Column(name = "host_id", nullable = false)
   private UUID hostId;
 
-  @Column(name = "name", nullable = false)
+  @Column(name = "name", nullable = false, length = 100)
   private String name;
 
-  @Column(name = "description")
+  @Column(name = "description", length = 10_000)
   private String description;
 
   @Column(name="age_range", nullable = false)
