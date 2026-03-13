@@ -2,7 +2,6 @@ package com.feponiel.swiftpass.infrastructure.http.payloads;
 
 import org.hibernate.validator.constraints.URL;
 
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
