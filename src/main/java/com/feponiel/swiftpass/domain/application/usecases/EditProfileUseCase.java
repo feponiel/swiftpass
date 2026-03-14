@@ -9,22 +9,22 @@ import com.feponiel.swiftpass.domain.application.repositories.UsersRepository;
 import com.feponiel.swiftpass.domain.application.usecases.exceptions.NoFieldProvidedToEditException;
 import com.feponiel.swiftpass.domain.application.usecases.exceptions.UserNotFoundException;
 import com.feponiel.swiftpass.domain.business.entities.User;
-import com.feponiel.swiftpass.domain.business.events.UserEditedEvent;
+import com.feponiel.swiftpass.domain.business.events.ProfileEditedEvent;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class EditUserUseCase {
+public class EditProfileUseCase {
   private final UsersRepository usersRepository;
   private final ApplicationEventPublisher eventPublisher;
 
-  public void execute(UUID userToEditId, UUID editorId, String name, String pictureUrl) {
+  public void execute(UUID userId, String name, String pictureUrl) {
     if (name == null && pictureUrl == null) {
       throw new NoFieldProvidedToEditException();
     }
 
-    User user = this.usersRepository.findById(userToEditId)
+    User user = this.usersRepository.findById(userId)
       .orElseThrow(UserNotFoundException::new);
 
     user
@@ -33,8 +33,8 @@ public class EditUserUseCase {
 
     this.usersRepository.update(user);
 
-    UserEditedEvent userEditedEvent = new UserEditedEvent(user, editorId);
+    ProfileEditedEvent profileEditedEvent = new ProfileEditedEvent(user);
 
-    this.eventPublisher.publishEvent(userEditedEvent);
+    this.eventPublisher.publishEvent(profileEditedEvent);
   }
 }

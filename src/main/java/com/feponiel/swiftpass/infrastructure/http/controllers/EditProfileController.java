@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.feponiel.swiftpass.domain.application.usecases.EditUserUseCase;
+import com.feponiel.swiftpass.domain.application.usecases.EditProfileUseCase;
 import com.feponiel.swiftpass.infrastructure.http.payloads.EditProfilePayload;
 import com.feponiel.swiftpass.infrastructure.http.utils.AuthenticatedUserInfoExtractor;
 
@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/me")
 @RequiredArgsConstructor
 public class EditProfileController {
-  private final EditUserUseCase editUserUseCase;
+  private final EditProfileUseCase editProfileUseCase;
 
   @PatchMapping
   public ResponseEntity<Void> handle(
@@ -30,8 +30,7 @@ public class EditProfileController {
   ) {
     UUID authenticatedUserId = AuthenticatedUserInfoExtractor.extractId(authenticatedUser);
 
-    this.editUserUseCase.execute(
-      authenticatedUserId,
+    this.editProfileUseCase.execute(
       authenticatedUserId,
       payload.getName(),
       payload.getPictureUrl()
