@@ -44,7 +44,7 @@ public class JPAEventsRepository implements EventsRepository {
   @Override
   public List<Event> listAll() {
     return this.entityManager
-      .createQuery("SELECT event FROM JPAEvent", JPAEvent.class)
+      .createQuery("SELECT event FROM JPAEvent event", JPAEvent.class)
       .getResultList()
       .stream()
       .map(eventMapper::toDomain)
