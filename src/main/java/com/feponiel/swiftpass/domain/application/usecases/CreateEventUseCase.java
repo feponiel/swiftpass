@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class CreateEvent {
+public class CreateEventUseCase {
   private final EventsRepository eventsRepository;
 
   public Event execute(

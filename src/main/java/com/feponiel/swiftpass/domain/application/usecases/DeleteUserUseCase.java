@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class DeleteUser {
+public class DeleteUserUseCase {
   private final UsersRepository usersRepository;
   private final ApplicationEventPublisher eventPublisher;
 

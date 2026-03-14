@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class EditUser {
+public class EditUserUseCase {
   private final UsersRepository usersRepository;
   private final ApplicationEventPublisher eventPublisher;
 

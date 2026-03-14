@@ -13,7 +13,7 @@ import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
 
-import com.feponiel.swiftpass.domain.application.usecases.FindOrCreateUserByGoogle;
+import com.feponiel.swiftpass.domain.application.usecases.FindOrCreateUserByGoogleUseCase;
 import com.feponiel.swiftpass.domain.business.entities.User;
 
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class CustomOAuth2UserService implements OAuth2UserService<OidcUserRequest, OidcUser> {
-  private final FindOrCreateUserByGoogle findOrCreateUserByGoogle;
+  private final FindOrCreateUserByGoogleUseCase findOrCreateUserByGoogleUseCase;
   private final OidcUserService delegate = new OidcUserService();
 
   @Override
@@ -33,7 +33,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OidcUserReques
     String email = oidcUser.getAttribute("email");
     String pictureUrl = oidcUser.getAttribute("picture");
 
-    User user = this.findOrCreateUserByGoogle.execute(providerId, name, email, pictureUrl);
+    User user = this.findOrCreateUserByGoogleUseCase.execute(providerId, name, email, pictureUrl);
 
     Map<String, Object> attributes = new HashMap<>(oidcUser.getAttributes());
     attributes.put("id", user.getId());

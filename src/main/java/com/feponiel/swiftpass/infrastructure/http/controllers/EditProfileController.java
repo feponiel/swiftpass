@@ -5,26 +5,37 @@ import java.util.UUID;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.feponiel.swiftpass.domain.application.usecases.DeleteUser;
+import com.feponiel.swiftpass.domain.application.usecases.EditUserUseCase;
+import com.feponiel.swiftpass.infrastructure.http.payloads.EditProfilePayload;
 import com.feponiel.swiftpass.infrastructure.http.utils.AuthenticatedUserInfoExtractor;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/me")
 @RequiredArgsConstructor
-public class DeleteOwnAccount {
-  private final DeleteUser deleteUser;
+public class EditProfileController {
+  private final EditUserUseCase editUserUseCase;
 
-  @DeleteMapping
-  public ResponseEntity<Void> handle(@AuthenticationPrincipal OAuth2User authenticatedUser) {
+  @PatchMapping
+  public ResponseEntity<Void> handle(
+    @AuthenticationPrincipal OAuth2User authenticatedUser,
+    @Valid @RequestBody EditProfilePayload payload
+  ) {
     UUID authenticatedUserId = AuthenticatedUserInfoExtractor.extractId(authenticatedUser);
 
-    this.deleteUser.execute(authenticatedUserId, authenticatedUserId);
+    this.editUserUseCase.execute(
+      authenticatedUserId,
+      authenticatedUserId,
+      payload.getName(),
+      payload.getPictureUrl()
+    );
 
     return ResponseEntity.noContent().build();
   }

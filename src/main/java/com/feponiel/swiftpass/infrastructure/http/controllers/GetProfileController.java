@@ -12,7 +12,7 @@ import com.feponiel.swiftpass.infrastructure.http.presenters.dtos.GetProfileHTTP
 
 @RestController
 @RequestMapping("/me")
-public class GetProfile {
+public class GetProfileController {
   @GetMapping
   public ResponseEntity<GetProfileHTTPResponse> handle(@AuthenticationPrincipal OAuth2User authenticatedUser) {
     var authenticatedUserProps = authenticatedUser.getAttributes();

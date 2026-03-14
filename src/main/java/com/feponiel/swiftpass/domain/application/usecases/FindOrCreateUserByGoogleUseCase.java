@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class FindOrCreateUserByGoogle {
+public class FindOrCreateUserByGoogleUseCase {
   private final UsersRepository usersRepository;
 
   public User execute(String providerId, String name, String email, String pictureUrl) {

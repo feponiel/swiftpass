@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.feponiel.swiftpass.domain.application.usecases.CreateEvent;
+import com.feponiel.swiftpass.domain.application.usecases.CreateEventUseCase;
 import com.feponiel.swiftpass.domain.business.entities.Event;
 import com.feponiel.swiftpass.infrastructure.http.payloads.CreateNewEventPayload;
 import com.feponiel.swiftpass.infrastructure.http.presenters.CreateNewEventPresenter;
@@ -25,8 +25,8 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/events")
 @RequiredArgsConstructor
-public class CreateNewEvent {
-  private final CreateEvent createEvent;
+public class CreateEventController {
+  private final CreateEventUseCase createEventUseCase;
 
   @PostMapping
   public ResponseEntity<CreateNewEventHTTPResponse> handle(
@@ -35,7 +35,7 @@ public class CreateNewEvent {
   ) {
     UUID authenticatedUserId = AuthenticatedUserInfoExtractor.extractId(authenticatedUser);
 
-    Event event = this.createEvent.execute(
+    Event event = this.createEventUseCase.execute(
       authenticatedUserId,
       payload.getName(),
       payload.getDescription(),
