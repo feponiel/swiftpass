@@ -4,10 +4,8 @@ import com.feponiel.swiftpass.domain.business.entities.Event;
 import com.feponiel.swiftpass.infrastructure.http.presenters.dtos.EventHTTPResponseModel;
 
 import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CreateNewEventPresenter {
   public static EventHTTPResponseModel toHTTP(Event event) {

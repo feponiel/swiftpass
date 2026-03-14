@@ -6,10 +6,8 @@ import java.util.Map;
 import com.feponiel.swiftpass.infrastructure.http.presenters.dtos.ProfileHTTPResponseModel;
 
 import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class GetProfilePresenter {
   public static ProfileHTTPResponseModel toHTTP(Map<String, Object> authenticatedUserProps) {
