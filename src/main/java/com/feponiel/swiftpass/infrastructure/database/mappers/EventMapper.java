@@ -23,9 +23,10 @@ public class EventMapper {
       .hostId(rawEvent.getHostId())
       .name(rawEvent.getName())
       .description(rawEvent.getDescription())
+      .bannerUrl(rawEvent.getBannerUrl())
       .ageRange(rawEvent.getAgeRange())
       .salesOpen(rawEvent.getSalesOpen())
-      .locationAddress(eventAddressLocation)
+      .address(eventAddressLocation)
       .startDate(rawEvent.getStartDate())
       .endDate(rawEvent.getEndDate())
       .createdAt(rawEvent.getCreatedAt())
@@ -40,14 +41,15 @@ public class EventMapper {
       rawEvent.getHostId(),
       rawEvent.getName(),
       rawEvent.getDescription(),
+      rawEvent.getBannerUrl(),
       rawEvent.getAgeRange(),
       rawEvent.getSalesOpen(),
-      rawEvent.getLocationAddress().getPostalCode(),
-      rawEvent.getLocationAddress().getCountry(),
-      rawEvent.getLocationAddress().getState(),
-      rawEvent.getLocationAddress().getCity(),
-      rawEvent.getLocationAddress().getAddressLine1(),
-      rawEvent.getLocationAddress().getAddressLine2(),
+      rawEvent.getAddress().getPostalCode(),
+      rawEvent.getAddress().getCountry(),
+      rawEvent.getAddress().getState(),
+      rawEvent.getAddress().getCity(),
+      rawEvent.getAddress().getAddressLine1(),
+      rawEvent.getAddress().getAddressLine2(),
       rawEvent.getStartDate(),
       rawEvent.getEndDate(),
       rawEvent.getCreatedAt(),

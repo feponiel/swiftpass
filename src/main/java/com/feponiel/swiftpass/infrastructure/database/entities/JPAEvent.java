@@ -30,6 +30,9 @@ public class JPAEvent {
   @Column(name = "description", length = 10_000)
   private String description;
 
+  @Column(name = "banner_url", length = 2048)
+  private String bannerUrl;
+
   @Column(name="age_range", nullable = false)
   private Integer ageRange;
 

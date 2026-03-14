@@ -14,9 +14,10 @@ public class Event extends Entity {
   private UUID hostId;
   private String name;
   private String description;
+  private String bannerUrl;
   private Integer ageRange;
   private Boolean salesOpen;
-  private Address locationAddress;
+  private Address address;
   private Instant startDate;
   private Instant endDate;
   private Instant createdAt;
@@ -29,9 +30,10 @@ public class Event extends Entity {
     @NonNull UUID hostId,
     @NonNull String name,
     String description,
+    String bannerUrl,
     @NonNull Integer ageRange,
     Boolean salesOpen,
-    @NonNull Address locationAddress,
+    @NonNull Address address,
     @NonNull Instant startDate,
     @NonNull Instant endDate,
     Instant createdAt,
@@ -43,9 +45,10 @@ public class Event extends Entity {
     this.hostId = hostId;
     this.name = name;
     this.description = description;
+    this.bannerUrl = bannerUrl;
     this.ageRange = ageRange;
     this.salesOpen = salesOpen != null ? salesOpen : false;
-    this.locationAddress = locationAddress;
+    this.address = address;
     this.startDate = startDate;
     this.endDate = endDate;
     this.createdAt = createdAt != null ? createdAt : Instant.now();
@@ -75,6 +78,12 @@ public class Event extends Entity {
     this.markEdited();
   }
 
+  public void changeBanner(String newBannerUrl) {
+    this.bannerUrl = newBannerUrl;
+
+    this.markEdited();
+  }
+
   public void changeAgeRange(Integer newAgeRange) {
     this.ageRange = newAgeRange;
 
@@ -93,8 +102,8 @@ public class Event extends Entity {
     this.touch();
   }
 
-  public void changeLocationAddress(Address newLocationAddress) {
-    this.locationAddress = newLocationAddress;
+  public void changeAddress(Address newAddress) {
+    this.address = newAddress;
 
     this.markEdited();
   }
