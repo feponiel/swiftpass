@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.feponiel.swiftpass.infrastructure.http.presenters.GetProfilePresenter;
+import com.feponiel.swiftpass.infrastructure.http.presenters.dtos.GetProfileHTTPResponse;
 
 @RestController
 @RequestMapping("/me")
 public class GetProfile {
   @GetMapping
-  public ResponseEntity<GetProfilePresenter> handle(@AuthenticationPrincipal OAuth2User authenticatedUser) {
+  public ResponseEntity<GetProfileHTTPResponse> handle(@AuthenticationPrincipal OAuth2User authenticatedUser) {
     var authenticatedUserProps = authenticatedUser.getAttributes();
 
     return ResponseEntity.ok(GetProfilePresenter.toHTTP(authenticatedUserProps));
