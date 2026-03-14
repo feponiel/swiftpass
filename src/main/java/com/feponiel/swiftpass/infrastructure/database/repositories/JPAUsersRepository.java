@@ -31,7 +31,7 @@ public class JPAUsersRepository implements UsersRepository {
 
   @Override
   public Optional<User> findById(UUID id) {
-    return entityManager
+    return this.entityManager
       .createQuery("SELECT user FROM JPAUser user WHERE user.id = :id", JPAUser.class)
       .setParameter("id", id)
       .getResultStream()
@@ -41,7 +41,7 @@ public class JPAUsersRepository implements UsersRepository {
 
   @Override
   public Optional<User> findByProviderId(String providerId) {
-    return entityManager
+    return this.entityManager
       .createQuery("SELECT user FROM JPAUser user WHERE user.providerId = :providerId", JPAUser.class)
       .setParameter("providerId", providerId)
       .getResultStream()
@@ -51,7 +51,7 @@ public class JPAUsersRepository implements UsersRepository {
 
   @Override
   public void update(User user) {
-    entityManager
+    this.entityManager
       .createQuery("UPDATE JPAUser user SET user.name = :name, user.pictureUrl = :pictureUrl, user.role = :role, user.updatedAt = :updatedAt, user.editedAt = :editedAt WHERE user.id = :id")
       .setParameter("name", user.getName())
       .setParameter("pictureUrl", user.getPictureUrl())
@@ -64,7 +64,7 @@ public class JPAUsersRepository implements UsersRepository {
 
   @Override
   public void deleteById(UUID id) {
-    entityManager
+    this.entityManager
       .createQuery("DELETE FROM JPAUser user WHERE user.id = :id")
       .setParameter("id", id)
       .executeUpdate();
