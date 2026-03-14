@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class GetProfileHTTPResponse {
+public class ProfileHTTPResponseModel {
   private final String id;
   private final String name;
   private final String email;

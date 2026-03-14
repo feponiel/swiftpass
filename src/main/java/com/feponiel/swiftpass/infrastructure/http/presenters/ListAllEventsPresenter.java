@@ -3,7 +3,7 @@ package com.feponiel.swiftpass.infrastructure.http.presenters;
 import java.util.List;
 
 import com.feponiel.swiftpass.domain.business.entities.Event;
-import com.feponiel.swiftpass.infrastructure.http.presenters.dtos.ListAllEventsHTTPResponse;
+import com.feponiel.swiftpass.infrastructure.http.presenters.dtos.EventListHTTPResponseModel;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ListAllEventsPresenter {
-  public static ListAllEventsHTTPResponse toHTTP(List<Event> events) {
-    List<ListAllEventsHTTPResponse.Event> remodeledEventList = events
+  public static EventListHTTPResponseModel toHTTP(List<Event> events) {
+    List<EventListHTTPResponseModel.Event> remodeledEventList = events
       .stream()
       .map(event -> {
-        return new ListAllEventsHTTPResponse.Event(
+        return new EventListHTTPResponseModel.Event(
           event.getId(),
           event.getHostId(),
           event.getName(),
@@ -35,6 +35,6 @@ public class ListAllEventsPresenter {
       })
       .toList();
 
-    return new ListAllEventsHTTPResponse(remodeledEventList);
+    return new EventListHTTPResponseModel(remodeledEventList);
   }
 }

@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class CreateNewEventHTTPResponse {
+public class EventHTTPResponseModel {
   private final UUID id;
   private final UUID hostId;
   private final String name;

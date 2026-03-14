@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.feponiel.swiftpass.domain.application.usecases.ListAllEventsUseCase;
 import com.feponiel.swiftpass.domain.business.entities.Event;
 import com.feponiel.swiftpass.infrastructure.http.presenters.ListAllEventsPresenter;
-import com.feponiel.swiftpass.infrastructure.http.presenters.dtos.ListAllEventsHTTPResponse;
+import com.feponiel.swiftpass.infrastructure.http.presenters.dtos.EventListHTTPResponseModel;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +21,7 @@ public class ListAllEventsController {
   private final ListAllEventsUseCase listAllEventsUseCase;
 
   @GetMapping
-  public ResponseEntity<ListAllEventsHTTPResponse> handle() {
+  public ResponseEntity<EventListHTTPResponseModel> handle() {
     List<Event> events = this.listAllEventsUseCase.execute();
 
     return ResponseEntity.ok(ListAllEventsPresenter.toHTTP(events));

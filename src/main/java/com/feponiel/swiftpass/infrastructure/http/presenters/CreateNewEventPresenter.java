@@ -1,7 +1,7 @@
 package com.feponiel.swiftpass.infrastructure.http.presenters;
 
 import com.feponiel.swiftpass.domain.business.entities.Event;
-import com.feponiel.swiftpass.infrastructure.http.presenters.dtos.CreateNewEventHTTPResponse;
+import com.feponiel.swiftpass.infrastructure.http.presenters.dtos.EventHTTPResponseModel;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CreateNewEventPresenter {
-  public static CreateNewEventHTTPResponse toHTTP(Event event) {
-    return new CreateNewEventHTTPResponse(
+  public static EventHTTPResponseModel toHTTP(Event event) {
+    return new EventHTTPResponseModel(
       event.getId(),
       event.getHostId(),
       event.getName(),

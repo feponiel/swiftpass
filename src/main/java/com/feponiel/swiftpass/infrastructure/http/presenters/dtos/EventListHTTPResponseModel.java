@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class ListAllEventsHTTPResponse {
+public class EventListHTTPResponseModel {
   @Getter
   @RequiredArgsConstructor
   public static class Event {

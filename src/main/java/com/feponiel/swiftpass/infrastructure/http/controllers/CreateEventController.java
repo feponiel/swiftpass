@@ -15,7 +15,7 @@ import com.feponiel.swiftpass.domain.application.usecases.CreateEventUseCase;
 import com.feponiel.swiftpass.domain.business.entities.Event;
 import com.feponiel.swiftpass.infrastructure.http.payloads.CreateNewEventPayload;
 import com.feponiel.swiftpass.infrastructure.http.presenters.CreateNewEventPresenter;
-import com.feponiel.swiftpass.infrastructure.http.presenters.dtos.CreateNewEventHTTPResponse;
+import com.feponiel.swiftpass.infrastructure.http.presenters.dtos.EventHTTPResponseModel;
 import com.feponiel.swiftpass.infrastructure.http.utils.AuthenticatedUserInfoExtractor;
 import com.feponiel.swiftpass.infrastructure.http.utils.HttpLocationBuilder;
 
@@ -29,7 +29,7 @@ public class CreateEventController {
   private final CreateEventUseCase createEventUseCase;
 
   @PostMapping
-  public ResponseEntity<CreateNewEventHTTPResponse> handle(
+  public ResponseEntity<EventHTTPResponseModel> handle(
     @AuthenticationPrincipal OAuth2User authenticatedUser,
     @RequestBody @Valid CreateNewEventPayload payload
   ) {
