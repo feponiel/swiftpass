@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
+@Secured("ROLE_ADMIN")
 @RequestMapping("/events")
 @RequiredArgsConstructor
 public class CreateEventController {
