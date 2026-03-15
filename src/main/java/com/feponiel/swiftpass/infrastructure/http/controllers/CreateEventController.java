@@ -24,7 +24,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@Secured("ROLE_ADMIN")
+@Secured("ROLE_ORGANIZER")
 @RequestMapping("/events")
 @RequiredArgsConstructor
 public class CreateEventController {
