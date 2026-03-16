@@ -1,4 +1,4 @@
-package com.feponiel.swiftpass.infrastructure.database.mappers;
+package com.feponiel.swiftpass.infrastructure.mappers;
 
 import org.springframework.stereotype.Component;
 

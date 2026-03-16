@@ -11,7 +11,7 @@ import com.feponiel.swiftpass.domain.application.repositories.EventsRepository;
 import com.feponiel.swiftpass.domain.business.entities.Event;
 import com.feponiel.swiftpass.domain.business.valueobjects.Address;
 import com.feponiel.swiftpass.infrastructure.database.entities.JPAEvent;
-import com.feponiel.swiftpass.infrastructure.database.mappers.EventMapper;
+import com.feponiel.swiftpass.infrastructure.mappers.EventMapper;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -56,7 +56,7 @@ public class JPAEventsRepository implements EventsRepository {
     Address eventAddress = event.getAddress();
 
     this.entityManager
-      .createQuery("UPDATE JPAEvent event SET event.name = :name, event.description = :description, event.bannerUrl :bannerUrl, event.ageRange = :ageRange, event.salesOpen = :salesOpen, event.postalCode = :postalCode, event.country = :country, event.state = :state, event.city = :city, event.addressLine1 = :addressLine1, event.addressLine2 = :addressLine2, event.startDate = :startDate, event.endDate = :endDate, event.updatedAt = :updatedAt, event.editedAt = :editedAt WHERE event.id = :id")
+      .createQuery("UPDATE JPAEvent event SET event.name = :name, event.description = :description, event.bannerUrl = :bannerUrl, event.ageRange = :ageRange, event.salesOpen = :salesOpen, event.postalCode = :postalCode, event.country = :country, event.state = :state, event.city = :city, event.addressLine1 = :addressLine1, event.addressLine2 = :addressLine2, event.startDate = :startDate, event.endDate = :endDate, event.updatedAt = :updatedAt, event.editedAt = :editedAt WHERE event.id = :id")
       .setParameter("name", event.getName())
       .setParameter("description", event.getDescription())
       .setParameter("bannerUrl", event.getBannerUrl())

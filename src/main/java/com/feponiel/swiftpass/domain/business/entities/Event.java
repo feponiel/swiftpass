@@ -66,28 +66,48 @@ public class Event extends Entity {
     this.editedAt = Instant.now();
   }
 
-  public void changeName(String newName) {
+  public Event changeName(String newName) {
+    if (newName == null)
+      return this;
+
     this.name = newName;
 
     this.markEdited();
+
+    return this;
   }
 
-  public void changeDescription(String newDescription) {
+  public Event changeDescription(String newDescription) {
+    if (newDescription == null)
+      return this;
+
     this.description = newDescription;
 
     this.markEdited();
+
+    return this;
   }
 
-  public void changeBanner(String newBannerUrl) {
+  public Event changeBanner(String newBannerUrl) {
+    if (newBannerUrl == null)
+      return this;
+
     this.bannerUrl = newBannerUrl;
 
     this.markEdited();
+
+    return this;
   }
 
-  public void changeAgeRange(Integer newAgeRange) {
+  public Event changeAgeRange(Integer newAgeRange) {
+    if (newAgeRange == null)
+      return this;
+
     this.ageRange = newAgeRange;
 
     this.markEdited();
+
+    return this;
   }
 
   public void openSales() {
@@ -102,22 +122,37 @@ public class Event extends Entity {
     this.touch();
   }
 
-  public void changeAddress(Address newAddress) {
+  public Event changeAddress(Address newAddress) {
+    if (newAddress == null)
+      return this;
+
     this.address = newAddress;
 
     this.markEdited();
+
+    return this;
   }
 
-  public void changeStartDate(Instant newStartDate) {
+  public Event changeStartDate(Instant newStartDate) {
+    if (newStartDate == null)
+      return this;
+
     this.startDate = newStartDate;
 
     this.markEdited();
+
+    return this;
   }
 
-  public void changeEndDate(Instant newEndDate) {
+  public Event changeEndDate(Instant newEndDate) {
+    if (newEndDate == null)
+      return this;
+
     this.endDate = newEndDate;
 
     this.markEdited();
+
+    return this;
   }
 
   public Boolean isOver() {
