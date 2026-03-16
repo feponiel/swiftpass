@@ -56,34 +56,59 @@ public class Ticket extends Entity {
     this.editedAt = Instant.now();
   }
 
-  public void changeName(String newName) {
+  public Ticket changeName(String newName) {
+    if (newName == null)
+      return this;
+
     this.name = newName;
 
     this.markEdited();
+
+    return this;
   }
 
-  public void changeDescription(String newDescription) {
+  public Ticket changeDescription(String newDescription) {
+    if (newDescription == null)
+      return this;
+
     this.description = newDescription;
 
     this.markEdited();
+
+    return this;
   }
 
-  public void changePrice(BigDecimal newPrice) {
+  public Ticket changePrice(BigDecimal newPrice) {
+    if (newPrice == null)
+      return this;
+
     this.price = newPrice;
 
     this.markEdited();
+
+    return this;
   }
 
-  public void changeCurrency(String newCurrency) {
+  public Ticket changeCurrency(String newCurrency) {
+    if (newCurrency == null)
+      return this;
+
     this.currency = newCurrency;
 
     this.markEdited();
+
+    return this;
   }
 
-  public void changeAmountAvailable(Integer newAmountAvailable) {
+  public Ticket changeAmountAvailable(Integer newAmountAvailable) {
+    if (newAmountAvailable == null)
+      return this;
+
     this.amountAvailable = newAmountAvailable;
 
     this.markEdited();
+
+    return this;
   }
 
   public Boolean isSoldOut() {
