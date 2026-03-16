@@ -30,5 +30,6 @@ public class CreateTicketPayload {
   private String currency;
 
   @NotNull
+  @Min(1)
   private Integer amountAvailable;
 }
