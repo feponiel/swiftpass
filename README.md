@@ -13,7 +13,7 @@
 `DELETE /me` Delete your account  
 
 #### Events & Tickets
-`POST /events` Create a new event
+`POST /events` Create a new event  
 `GET /events` List all events  
 `GET /events/:eventId` Get a specific event  
 `PATCH /events/:eventId` Edit a specific event  
