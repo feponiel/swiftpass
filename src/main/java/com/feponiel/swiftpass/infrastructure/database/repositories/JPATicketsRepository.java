@@ -62,7 +62,7 @@ public class JPATicketsRepository implements TicketsRepository {
 
   public void deleteById(UUID id) {
     this.entityManager
-      .createQuery("DELETE JPATicket ticket WHERE ticket.id = :id", JPATicket.class)
+      .createQuery("DELETE JPATicket ticket WHERE ticket.id = :id")
       .setParameter("id", id)
       .executeUpdate();
   }
