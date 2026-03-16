@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateNewEventPayload {
+public class CreateEventPayload {
   @Getter
   @NoArgsConstructor
   @AllArgsConstructor

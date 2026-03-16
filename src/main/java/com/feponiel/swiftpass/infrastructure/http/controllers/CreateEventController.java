@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.feponiel.swiftpass.domain.application.usecases.CreateEventUseCase;
 import com.feponiel.swiftpass.domain.business.entities.Event;
-import com.feponiel.swiftpass.infrastructure.http.payloads.CreateNewEventPayload;
+import com.feponiel.swiftpass.infrastructure.http.payloads.CreateEventPayload;
 import com.feponiel.swiftpass.infrastructure.http.presenters.CreateNewEventPresenter;
 import com.feponiel.swiftpass.infrastructure.http.presenters.dtos.EventHTTPResponseModel;
 import com.feponiel.swiftpass.infrastructure.http.utils.AuthenticatedUserInfoExtractor;
@@ -33,7 +33,7 @@ public class CreateEventController {
   @PostMapping
   public ResponseEntity<EventHTTPResponseModel> handle(
     @AuthenticationPrincipal OAuth2User authenticatedUser,
-    @RequestBody @Valid CreateNewEventPayload payload
+    @RequestBody @Valid CreateEventPayload payload
   ) {
     UUID authenticatedUserId = AuthenticatedUserInfoExtractor.extractId(authenticatedUser);
 
