@@ -40,7 +40,7 @@ public class JPATicketsRepository implements TicketsRepository {
 
   public List<Ticket> listAllByEventId(UUID eventId) {
     return this.entityManager
-      .createQuery("SELECT ticket FROM JPATicket WHERE ticket.eventId = :eventId", JPATicket.class)
+      .createQuery("SELECT ticket FROM JPATicket ticket WHERE ticket.eventId = :eventId", JPATicket.class)
       .setParameter("eventId", eventId)
       .getResultList()
       .stream()
