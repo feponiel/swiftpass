@@ -21,7 +21,7 @@ public class DeleteEventController {
   private final DeleteEventUseCase deleteEventUseCase;
 
   @DeleteMapping
-  public ResponseEntity<Void> handle(@PathVariable("eventId") UUID eventId) {
+  public ResponseEntity<Void> handle(@PathVariable UUID eventId) {
     this.deleteEventUseCase.execute(eventId);
 
     return ResponseEntity.noContent().build();
