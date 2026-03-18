@@ -1,5 +1,7 @@
 application:
   front-end-url: http://localhost:3000
+  stripe:
+    secret-key: ${STRIPE_SECRET_KEY}
 
 logging:
   level:

@@ -25,7 +25,7 @@
 `DELETE /tickets/:ticketId` Delete a specific ticket for an event  
 
 #### Registrations
-`POST /events/:eventId/registrations` Register for an event  
+`POST /registrations` Register for an event  
 `GET /events/:eventId/registrations?status={status}` List all event registrations, filtered by status or not  
 `GET /registrations/me` Get your event registrations  
 `PATCH /registrations/:registrationId/cancel` Cancel a specific event registration  

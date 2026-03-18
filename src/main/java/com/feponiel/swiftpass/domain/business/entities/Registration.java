@@ -37,7 +37,7 @@ public class Registration extends Entity {
     String stripeSessionId,
     BigDecimal totalPaid,
     String paidCurrency,
-    @NonNull Instant createdAt,
+    Instant createdAt,
     Instant updatedAt,
     Instant editedAt
   ) {
@@ -67,47 +67,78 @@ public class Registration extends Entity {
     this.editedAt = Instant.now();
   }
 
-  public void changeHolderName(String newHolderName) {
+  public Registration changeHolderName(String newHolderName) {
     this.holderName = newHolderName;
 
     this.markEdited();
+
+    return this;
   }
 
-  public void updatePaymentStatus(PaymentStatus newPaymentStatus) {
+  public Registration updatePaymentStatus(PaymentStatus newPaymentStatus) {
+    if (newPaymentStatus == null)
+      return this;
+
     this.paymentStatus = newPaymentStatus;
 
     this.touch();
+
+    return this;
   }
 
-  public void updateCheckoutURL(String newCheckoutURL) {
+  public Registration updateCheckoutURL(String newCheckoutURL) {
+    if (newCheckoutURL == null)
+      return this;
+
     this.checkoutUrl = newCheckoutURL;
 
     this.touch();
+
+    return this;
   }
 
-  public void updateStripeSessionID(String newStripeSessionID) {
+  public Registration updateStripeSessionID(String newStripeSessionID) {
+    if (newStripeSessionID == null)
+      return this;
+
     this.stripeSessionId = newStripeSessionID;
 
     this.touch();
+
+    return this;
   }
 
-  public void updateTotalPaid(BigDecimal newTotalPaid) {
+  public Registration updateTotalPaid(BigDecimal newTotalPaid) {
+    if (newTotalPaid == null)
+      return this;
+
     this.totalPaid = newTotalPaid;
 
     this.touch();
+
+    return this;
   }
 
-  public void updatePaidCurrency(String newPaidCurrency) {
+  public Registration updatePaidCurrency(String newPaidCurrency) {
+    if (newPaidCurrency == null)
+      return this;
+
     this.paidCurrency = newPaidCurrency;
 
     this.touch();
+
+    return this;
   }
 
   public void cancel() {
     this.paymentStatus = PaymentStatus.CANCELLED;
+
+    this.touch();
   }
 
   public void refund() {
     this.paymentStatus = PaymentStatus.REFUNDED;
+
+    this.touch();
   }
 }
