@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.feponiel.swiftpass.domain.application.repositories.UsersRepository;
 import com.feponiel.swiftpass.domain.application.usecases.exceptions.UserNotFoundException;
+import com.feponiel.swiftpass.domain.business.events.DomainEvent;
 import com.feponiel.swiftpass.domain.business.events.UserDeletedEvent;
 
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class DeleteUserUseCase {
 
     this.usersRepository.deleteById(userToDeleteId);
 
-    UserDeletedEvent userDeletedEvent = new UserDeletedEvent(userToDeleteId, deleterId);
+    DomainEvent userDeletedEvent = new UserDeletedEvent(userToDeleteId, deleterId);
 
     this.eventPublisher.publishEvent(userDeletedEvent);
   }
