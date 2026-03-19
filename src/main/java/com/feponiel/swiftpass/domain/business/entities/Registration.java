@@ -129,16 +129,4 @@ public class Registration extends Entity {
 
     return this;
   }
-
-  public void cancel() {
-    this.paymentStatus = PaymentStatus.CANCELLED;
-
-    this.touch();
-  }
-
-  public void refund() {
-    this.paymentStatus = PaymentStatus.REFUNDED;
-
-    this.touch();
-  }
 }
