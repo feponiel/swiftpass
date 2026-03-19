@@ -54,6 +54,9 @@ public class StripeServiceImpl implements StripeService {
         .setMode(SessionCreateParams.Mode.PAYMENT)
         .setSuccessUrl(frontEndUrl + "/checkout/success")
         .setCancelUrl(frontEndUrl + "/checkout/cancel")
+        .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
+        .addPaymentMethodType(SessionCreateParams.PaymentMethodType.PIX)
+        .addPaymentMethodType(SessionCreateParams.PaymentMethodType.PAYPAL)
         .addAllLineItem(lineItems)
         .build();
 
