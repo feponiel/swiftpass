@@ -68,6 +68,9 @@ public class Registration extends Entity {
   }
 
   public Registration changeHolderName(String newHolderName) {
+    if (holderName == null)
+      return this;
+
     this.holderName = newHolderName;
 
     this.markEdited();

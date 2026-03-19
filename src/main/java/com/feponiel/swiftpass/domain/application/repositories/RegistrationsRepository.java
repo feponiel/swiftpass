@@ -11,6 +11,7 @@ public interface RegistrationsRepository {
   void create(Registration registration);
   Optional<Registration> findById(UUID id);
   List<Registration> listAllByRegistrantId(UUID registrantId);
+  List<Registration> listAllByStripeSessionId(String stripeSessionId);
   List<Registration> listAllByPaymentStatus(PaymentStatus paymentStatus);
   void update(Registration registration);
   void deleteById(UUID id);

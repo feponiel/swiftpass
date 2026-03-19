@@ -53,6 +53,17 @@ public class JPARegistrationsRepository implements RegistrationsRepository {
   }
 
   @Override
+  public List<Registration> listAllByStripeSessionId(String stripeSessionId) {
+    return entityManager
+      .createQuery("SELECT registration FROM JPARegistration registration WHERE registration.stripeSessionId = :stripeSessionId", JPARegistration.class)
+      .setParameter("stripeSessionId", stripeSessionId)
+      .getResultList()
+      .stream()
+      .map(registrationMapper::toDomain)
+      .toList();
+  }
+
+  @Override
   public List<Registration> listAllByPaymentStatus(PaymentStatus paymentStatus) {
     return this.entityManager
       .createQuery("SELECT registration FROM JPARegistration registration WHERE registration.paymentStatus = :paymentStatus", JPARegistration.class)
