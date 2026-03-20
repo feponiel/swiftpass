@@ -31,5 +31,5 @@ public class CreateTicketPayload {
 
   @NotNull
   @Min(1)
-  private Integer amountAvailable;
+  private Integer capacity;
 }

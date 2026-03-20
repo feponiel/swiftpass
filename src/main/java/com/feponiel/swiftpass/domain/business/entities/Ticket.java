@@ -15,7 +15,7 @@ public class Ticket extends Entity {
   private String description;
   private BigDecimal price;
   private String currency;
-  private Integer amountAvailable;
+  private Integer capacity;
   private Instant createdAt;
   private Instant updatedAt;
   private Instant editedAt;
@@ -28,7 +28,7 @@ public class Ticket extends Entity {
     String description,
     @NonNull BigDecimal price,
     @NonNull String currency,
-    @NonNull Integer amountAvailable,
+    @NonNull Integer capacity,
     Instant createdAt,
     Instant updatedAt,
     Instant editedAt
@@ -40,7 +40,7 @@ public class Ticket extends Entity {
     this.description = description;
     this.price = price;
     this.currency = currency;
-    this.amountAvailable = amountAvailable;
+    this.capacity = capacity;
     this.createdAt = createdAt != null ? createdAt : Instant.now();
     this.updatedAt = updatedAt;
     this.editedAt = editedAt;
@@ -100,18 +100,14 @@ public class Ticket extends Entity {
     return this;
   }
 
-  public Ticket changeAmountAvailable(Integer newAmountAvailable) {
-    if (newAmountAvailable == null)
+  public Ticket changeCapacity(Integer newCapacity) {
+    if (newCapacity == null)
       return this;
 
-    this.amountAvailable = newAmountAvailable;
+    this.capacity = newCapacity;
 
     this.markEdited();
 
     return this;
-  }
-
-  public Boolean isSoldOut() {
-    return this.amountAvailable <= 0;
   }
 }

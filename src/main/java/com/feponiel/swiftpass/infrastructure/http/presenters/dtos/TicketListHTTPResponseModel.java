@@ -20,8 +20,7 @@ public class TicketListHTTPResponseModel {
     private final String description;
     private final BigDecimal price;
     private final String currency;
-    private final Integer amountAvailable;
-    private final Boolean isSoldOut;
+    private final Integer capacity;
     private final Instant createdAt;
     private final Instant updatedAt;
     private final Instant editedAt;

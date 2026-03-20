@@ -26,5 +26,5 @@ public class EditTicketPayload {
   private String currency;
 
   @Min(1)
-  private Integer amountAvailable;
+  private Integer capacity;
 }

@@ -39,7 +39,7 @@ public class CreateTicketController {
       payload.getDescription(),
       payload.getPrice(),
       payload.getCurrency(),
-      payload.getAmountAvailable()
+      payload.getCapacity()
     );
 
     URI resourceLocation = HttpLocationBuilder.fromResourceId(ticket.getId());

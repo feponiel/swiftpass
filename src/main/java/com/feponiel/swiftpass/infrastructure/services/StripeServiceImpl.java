@@ -33,7 +33,7 @@ public class StripeServiceImpl implements StripeService {
         .stream()
         .map(item -> {
           return SessionCreateParams.LineItem.builder()
-            .setQuantity(item.ticketsAmount())
+            .setQuantity(item.ticketsCapacity())
             .setPriceData(
               SessionCreateParams.LineItem.PriceData.builder()
                 .setCurrency(item.ticketCurrency())

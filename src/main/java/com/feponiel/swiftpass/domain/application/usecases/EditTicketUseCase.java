@@ -25,14 +25,14 @@ public class EditTicketUseCase {
     String description,
     BigDecimal price,
     String currency,
-    Integer amountAvailable
+    Integer capacity
   ) {
     if (
       name == null &&
       description == null &&
       price == null &&
       currency == null &&
-      amountAvailable == null
+      capacity == null
     ) {
       throw new NoFieldProvidedToEditException();
     }
@@ -53,7 +53,7 @@ public class EditTicketUseCase {
       .changeDescription(description)
       .changePrice(price)
       .changeCurrency(currency)
-      .changeAmountAvailable(amountAvailable);
+      .changeCapacity(capacity);
 
     this.ticketsRepository.update(ticket);
   }

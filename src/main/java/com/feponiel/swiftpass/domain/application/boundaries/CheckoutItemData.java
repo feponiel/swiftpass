@@ -7,5 +7,5 @@ public record CheckoutItemData(
   String ticketDescription,
   BigDecimal ticketPrice,
   String ticketCurrency,
-  Long ticketsAmount
+  Long ticketsCapacity
 ) {}

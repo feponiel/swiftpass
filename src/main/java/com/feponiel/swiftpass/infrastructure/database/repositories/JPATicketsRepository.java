@@ -50,12 +50,12 @@ public class JPATicketsRepository implements TicketsRepository {
 
   public void update(Ticket ticket) {
     this.entityManager
-      .createQuery("UPDATE JPATicket ticket SET ticket.name = :name, ticket.description = :description, ticket.price = :price, ticket.currency = :currency, ticket.amountAvailable = :amountAvailable WHERE ticket.id = :id")
+      .createQuery("UPDATE JPATicket ticket SET ticket.name = :name, ticket.description = :description, ticket.price = :price, ticket.currency = :currency, ticket.capacity = :capacity WHERE ticket.id = :id")
       .setParameter("name", ticket.getName())
       .setParameter("description", ticket.getDescription())
       .setParameter("price", ticket.getPrice())
       .setParameter("currency", ticket.getCurrency())
-      .setParameter("amountAvailable", ticket.getAmountAvailable())
+      .setParameter("capacity", ticket.getCapacity())
       .setParameter("id", ticket.getId())
       .executeUpdate();
   }

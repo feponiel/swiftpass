@@ -15,7 +15,7 @@ public class TicketMapper {
       .description(rawTicket.getDescription())
       .price(rawTicket.getPrice())
       .currency(rawTicket.getCurrency())
-      .amountAvailable(rawTicket.getAmountAvailable())
+      .capacity(rawTicket.getCapacity())
       .createdAt(rawTicket.getCreatedAt())
       .updatedAt(rawTicket.getUpdatedAt())
       .editedAt(rawTicket.getEditedAt())
@@ -30,7 +30,7 @@ public class TicketMapper {
       rawTicket.getDescription(),
       rawTicket.getPrice(),
       rawTicket.getCurrency(),
-      rawTicket.getAmountAvailable(),
+      rawTicket.getCapacity(),
       rawTicket.getCreatedAt(),
       rawTicket.getUpdatedAt(),
       rawTicket.getEditedAt()

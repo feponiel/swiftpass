@@ -16,8 +16,7 @@ public class CreateTicketPresenter {
       ticket.getDescription(),
       ticket.getPrice(),
       ticket.getCurrency(),
-      ticket.getAmountAvailable(),
-      ticket.isSoldOut(),
+      ticket.getCapacity(),
       ticket.getCreatedAt(),
       ticket.getUpdatedAt(),
       ticket.getEditedAt()

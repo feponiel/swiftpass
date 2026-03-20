@@ -37,8 +37,8 @@ public class JPATicket {
   @Column(name = "currency", nullable = false, columnDefinition = "CHAR(3)")
   private String currency;
 
-  @Column(name = "amount_available", nullable = false)
-  private Integer amountAvailable;
+  @Column(name = "capacity", nullable = false)
+  private Integer capacity;
 
   @Column(name = "created_at", nullable = false)
   private Instant createdAt;

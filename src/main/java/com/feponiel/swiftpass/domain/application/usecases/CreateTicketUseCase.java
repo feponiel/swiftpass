@@ -20,7 +20,7 @@ public class CreateTicketUseCase {
   private final TicketsRepository ticketsRepository;
   private final EventsRepository eventsRepository;
 
-  public Ticket execute(UUID eventId, String name, String description, BigDecimal price, String currency, Integer amountAvailable) {
+  public Ticket execute(UUID eventId, String name, String description, BigDecimal price, String currency, Integer capacity) {
     this.eventsRepository.findById(eventId)
       .orElseThrow(EventNotFoundException::new);
 
@@ -37,7 +37,7 @@ public class CreateTicketUseCase {
       .description(description)
       .price(price)
       .currency(currency)
-      .amountAvailable(amountAvailable)
+      .capacity(capacity)
       .build();
 
     this.ticketsRepository.create(ticket);

@@ -34,7 +34,7 @@ public class EditTicketController {
       payload.getDescription(),
       payload.getPrice(),
       payload.getCurrency(),
-      payload.getAmountAvailable()
+      payload.getCapacity()
     );
 
     return ResponseEntity.noContent().build();
