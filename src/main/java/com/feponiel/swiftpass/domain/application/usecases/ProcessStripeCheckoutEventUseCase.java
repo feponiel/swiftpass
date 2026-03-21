@@ -2,67 +2,82 @@ package com.feponiel.swiftpass.domain.application.usecases;
 
 import java.util.List;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.feponiel.swiftpass.domain.application.providers.StripeConfigProvider;
+import com.feponiel.swiftpass.domain.application.boundaries.StripeCheckoutEventData;
 import com.feponiel.swiftpass.domain.application.repositories.RegistrationsRepository;
-import com.feponiel.swiftpass.domain.application.usecases.exceptions.InvalidStripeWebhookSignatureException;
-import com.feponiel.swiftpass.domain.application.usecases.exceptions.StripeEventDeserializationFailedException;
+import com.feponiel.swiftpass.domain.application.repositories.TicketsRepository;
+import com.feponiel.swiftpass.domain.application.services.StripeService;
+import com.feponiel.swiftpass.domain.application.usecases.exceptions.TicketNotFoundException;
 import com.feponiel.swiftpass.domain.business.entities.Registration;
+import com.feponiel.swiftpass.domain.business.entities.Ticket;
+import com.feponiel.swiftpass.domain.business.events.DomainEvent;
+import com.feponiel.swiftpass.domain.business.events.TicketOverbookedEvent;
 import com.feponiel.swiftpass.domain.business.valueobjects.PaymentStatus;
-import com.stripe.exception.SignatureVerificationException;
-import com.stripe.model.Event;
-import com.stripe.model.checkout.Session;
-import com.stripe.net.Webhook;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ProcessStripeCheckoutEventUseCase {
   private final RegistrationsRepository registrationsRepository;
-  private final StripeConfigProvider stripeConfigProvider;
+  private final TicketsRepository ticketsRepository;
+  private final StripeService stripeService;
+  private final ApplicationEventPublisher eventPublisher;
 
-  public void execute(String eventName, String stripeSignature) {
-    try {
-      Event stripeEvent = Webhook.constructEvent(eventName, stripeSignature, stripeConfigProvider.getWebhookSecret());
+  public void execute(String rawEvent, String stripeSignature) {
+    StripeCheckoutEventData checkoutEventData =
+      this.stripeService.parseWebhookAndGetSessionData(rawEvent, stripeSignature);
 
-      switch (stripeEvent.getType()) {
-        case "checkout.session.completed" -> handleCheckoutCompleted(stripeEvent);
-        case "checkout.session.expired" -> handleCheckoutExpired(stripeEvent);
-      }
-    } catch (SignatureVerificationException _) {
-      throw new InvalidStripeWebhookSignatureException();
+    if (checkoutEventData.eventType() == null) return;
+
+    switch (checkoutEventData.eventType()) {
+      case "checkout.session.completed" -> handleCheckoutCompleted(checkoutEventData.sessionId(), checkoutEventData.paymentIntentId());
+      case "checkout.session.expired" -> handleCheckoutExpired(checkoutEventData.sessionId());
     }
   }
 
-  private void handleCheckoutCompleted(Event stripeEvent) {
-    Session checkoutSession = (Session) stripeEvent
-      .getDataObjectDeserializer()
-      .getObject()
-      .orElseThrow(StripeEventDeserializationFailedException::new);
+  private void handleCheckoutCompleted(String sessionId, String paymentIntentId) {
+    List<Registration> registrations = this.registrationsRepository.listAllByStripeSessionId(sessionId);
 
-    List<Registration> registrations = this.registrationsRepository.listAllByStripeSessionId(checkoutSession.getId());
+    for (Registration registration : registrations) {
+      Ticket ticket = this.ticketsRepository.findByIdWithLock(registration.getTicketId())
+        .orElseThrow(TicketNotFoundException::new);
 
-    registrations.forEach(registration -> {
+      Integer confirmedCount = this.registrationsRepository.countConfirmedByTicketId(ticket.getId());
+      Integer remaining = ticket.getCapacity() - confirmedCount;
+
+      if (remaining <= 0) {
+        DomainEvent ticketOverbookedEvent = new TicketOverbookedEvent(paymentIntentId);
+        
+        this.eventPublisher.publishEvent(ticketOverbookedEvent);
+
+        markRegistrationsAsRefunded(registrations);
+
+        return;
+      }
+
       registration.updatePaymentStatus(PaymentStatus.PAID);
-
       this.registrationsRepository.update(registration);
-    });
+    }
   }
 
-  private void handleCheckoutExpired(Event stripeEvent) {
-    Session checkoutSession = (Session) stripeEvent
-      .getDataObjectDeserializer()
-      .getObject()
-      .orElseThrow(StripeEventDeserializationFailedException::new);
-
-    List<Registration> registrations = this.registrationsRepository.listAllByStripeSessionId(checkoutSession.getId());
-
-    registrations.forEach(registration -> {
-      registration.updatePaymentStatus(PaymentStatus.EXPIRED);
-
+  private void markRegistrationsAsRefunded(List<Registration> registrations) {
+    for (Registration registration : registrations) {
+      registration.updatePaymentStatus(PaymentStatus.REFUNDED);
       this.registrationsRepository.update(registration);
-    });
+    }
+  }
+
+  private void handleCheckoutExpired(String sessionId) {
+    List<Registration> registrations = this.registrationsRepository.listAllByStripeSessionId(sessionId);
+
+    for (Registration registration : registrations) {
+      registration.updatePaymentStatus(PaymentStatus.EXPIRED);
+      this.registrationsRepository.update(registration);
+    }
   }
 }

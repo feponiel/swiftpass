@@ -9,6 +9,7 @@ import com.feponiel.swiftpass.domain.business.entities.Ticket;
 public interface TicketsRepository {
   void create(Ticket ticket);
   Optional<Ticket> findById(UUID id);
+  Optional<Ticket> findByIdWithLock(UUID id);
   List<Ticket> listAllByEventId(UUID eventId);
   void update(Ticket ticket);
   void deleteById(UUID id);

@@ -75,6 +75,16 @@ public class JPARegistrationsRepository implements RegistrationsRepository {
   }
 
   @Override
+  public Integer countConfirmedByTicketId(UUID ticketId) {
+    return ((Long) this.entityManager
+      .createQuery("SELECT COUNT(registration) FROM JPARegistration registration WHERE registration.ticketId = :ticketId AND registration.paymentStatus = :paymentStatus")
+      .setParameter("ticketId", ticketId)
+      .setParameter("paymentStatus", PaymentStatus.PAID)
+      .getSingleResult())
+      .intValue();
+  }
+
+  @Override
   public void update(Registration registration) {
     this.entityManager
       .createQuery("UPDATE JPARegistration registration SET registration.holderName = :holderName, registration.paymentStatus = :paymentStatus, registration.checkoutUrl = :checkoutUrl, registration.stripeSessionId = :stripeSessionId, registration.totalPaid = :totalPaid, registration.paidCurrency = :paidCurrency WHERE registration.id = :id")

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ import com.feponiel.swiftpass.infrastructure.database.entities.JPATicket;
 import com.feponiel.swiftpass.infrastructure.mappers.TicketMapper;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.LockModeType;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 
@@ -30,6 +32,16 @@ public class JPATicketsRepository implements TicketsRepository {
   }
 
   public Optional<Ticket> findById(UUID id) {
+    return this.entityManager
+      .createQuery("SELECT ticket FROM JPATicket ticket WHERE ticket.id = :id", JPATicket.class)
+      .setParameter("id", id)
+      .getResultStream()
+      .findFirst()
+      .map(ticketMapper::toDomain);
+  }
+
+  @Lock(LockModeType.PESSIMISTIC_WRITE)
+  public Optional<Ticket> findByIdWithLock(UUID id) {
     return this.entityManager
       .createQuery("SELECT ticket FROM JPATicket ticket WHERE ticket.id = :id", JPATicket.class)
       .setParameter("id", id)
