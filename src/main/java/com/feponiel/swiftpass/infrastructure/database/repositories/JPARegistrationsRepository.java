@@ -64,9 +64,10 @@ public class JPARegistrationsRepository implements RegistrationsRepository {
   }
 
   @Override
-  public List<Registration> listAllByPaymentStatus(PaymentStatus paymentStatus) {
+  public List<Registration> listAllByEventIdAndPaymentStatus(UUID eventId, PaymentStatus paymentStatus) {
     return this.entityManager
-      .createQuery("SELECT registration FROM JPARegistration registration WHERE registration.paymentStatus = :paymentStatus", JPARegistration.class)
+      .createQuery("SELECT registration FROM JPARegistration registration WHERE registration.eventId = :eventId AND (:paymentStatus IS NULL OR registration.paymentStatus = :paymentStatus)", JPARegistration.class)
+      .setParameter("eventId", eventId)
       .setParameter("paymentStatus", paymentStatus)
       .getResultList()
       .stream()
