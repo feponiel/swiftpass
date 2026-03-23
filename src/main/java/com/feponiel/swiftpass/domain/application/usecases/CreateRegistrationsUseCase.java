@@ -1,5 +1,6 @@
 package com.feponiel.swiftpass.domain.application.usecases;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -13,8 +14,11 @@ import com.feponiel.swiftpass.domain.application.repositories.EventsRepository;
 import com.feponiel.swiftpass.domain.application.repositories.RegistrationsRepository;
 import com.feponiel.swiftpass.domain.application.repositories.TicketsRepository;
 import com.feponiel.swiftpass.domain.application.services.StripeService;
+import com.feponiel.swiftpass.domain.application.usecases.exceptions.EventHasAlreadyEndedException;
 import com.feponiel.swiftpass.domain.application.usecases.exceptions.EventNotFoundException;
+import com.feponiel.swiftpass.domain.application.usecases.exceptions.EventSalesClosedException;
 import com.feponiel.swiftpass.domain.application.usecases.exceptions.TicketNotFoundException;
+import com.feponiel.swiftpass.domain.business.entities.Event;
 import com.feponiel.swiftpass.domain.business.entities.Registration;
 import com.feponiel.swiftpass.domain.business.entities.Ticket;
 
@@ -42,8 +46,14 @@ public class CreateRegistrationsUseCase {
           Ticket ticket = this.ticketsRepository.findById(item.ticketId())
             .orElseThrow(TicketNotFoundException::new);
 
-          this.eventsRepository.findById(ticket.getEventId())
+          Event event = this.eventsRepository.findById(ticket.getEventId())
             .orElseThrow(EventNotFoundException::new);
+
+          if (Instant.now().isAfter(event.getEndDate()))
+            throw new EventHasAlreadyEndedException();
+
+          if (!event.getSalesOpen())
+            throw new EventSalesClosedException();
 
           Registration registration = Registration.builder()
             .id(UUID.randomUUID())
