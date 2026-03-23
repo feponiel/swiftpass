@@ -43,6 +43,19 @@ public class ProcessStripeCheckoutEventUseCase {
   private void handleCheckoutCompleted(String sessionId, String paymentIntentId) {
     List<Registration> registrations = this.registrationsRepository.listAllByStripeSessionId(sessionId);
 
+    // Two separate loops are needed here: the first populates paidCurrency and totalPaid for all registrations,
+    // so that if an overbooked scenario is detected in the second loop, markRegistrationsAsRefunded() will persist
+    // complete data for every registration, not just for the ones processed before the overbooked one was found.
+
+    for (Registration registration : registrations) {
+      Ticket ticket = this.ticketsRepository.findById(registration.getTicketId())
+        .orElseThrow(TicketNotFoundException::new);
+
+      registration
+        .updatePaidCurrency(ticket.getCurrency())
+        .updateTotalPaid(ticket.getPrice());
+    }
+
     for (Registration registration : registrations) {
       Ticket ticket = this.ticketsRepository.findByIdWithLock(registration.getTicketId())
         .orElseThrow(TicketNotFoundException::new);
