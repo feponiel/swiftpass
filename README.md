@@ -28,6 +28,7 @@
 `POST /registrations` Register for an event  
 `GET /events/:eventId/registrations?status={status}` List all event registrations, filtered by status or not  
 `GET /registrations/me` Get your event registrations  
+`GET /registrations/:registrationId` Get a specific registration  
 `PATCH /registrations/:registrationId/cancel` Cancel a specific event registration  
 `PATCH /registrations/:registrationId/refund` Mark a specific event registration as refunded  
 `DELETE /registrations/:registrationId` Delete a specific event registration  
