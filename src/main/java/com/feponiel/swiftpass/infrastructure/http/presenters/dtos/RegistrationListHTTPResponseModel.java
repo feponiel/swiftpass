@@ -23,6 +23,7 @@ public class RegistrationListHTTPResponseModel {
     private final String holderName;
     private final PaymentStatus paymentStatus;
     private final String checkoutUrl;
+    private final String stripeSessionId;
     private final BigDecimal totalPaid;
     private final String paidCurrency;
     private final Instant createdAt;

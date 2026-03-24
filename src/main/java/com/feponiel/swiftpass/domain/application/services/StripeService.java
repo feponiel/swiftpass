@@ -10,4 +10,5 @@ public interface StripeService {
   CheckoutSessionData createCheckoutSession(List<CheckoutItemData> checkoutItemsList);
   StripeCheckoutEventData parseWebhookAndGetSessionData(String eventName, String stripeSignature);
   void processFullRefund(String paymentIntentId);
+  void endSession(String stripeSessionId);
 }

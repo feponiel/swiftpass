@@ -105,4 +105,13 @@ public class StripeServiceImpl implements StripeService {
       throw new RuntimeException("Failed to process refund for payment intent: " + paymentIntentId, error);
     }
   }
+
+  public void endSession(String stripeSessionId) {
+    try {
+      Session session = Session.retrieve(stripeSessionId);
+      session.expire();
+    } catch (StripeException error) {
+      throw new RuntimeException("Failed to end stripe session: " + stripeSessionId, error);
+    }
+  }
 }

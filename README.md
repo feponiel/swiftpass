@@ -24,14 +24,13 @@
 `PATCH /tickets/:ticketId` Edit a specific ticket for an event  
 `DELETE /tickets/:ticketId` Delete a specific ticket for an event  
 
-#### Registrations
+#### Registrations & Checkout Sessions
 `POST /registrations` Register for an event  
 `GET /events/:eventId/registrations?status={status}` List all event registrations, filtered by status or not  
 `GET /me/registrations` Get your event registrations  
 `GET /registrations/:registrationId` Get a specific registration  
-`PATCH /registrations/:registrationId/cancel` Cancel a specific event registration  
 `PATCH /registrations/:registrationId/refund` Mark a specific event registration as refunded  
-`DELETE /registrations/:registrationId` Delete a specific event registration  
+`PATCH /checkout-sessions/:stripeSessionId/cancel` Cancel checkout session and invalidate registrations related  
 
 ### System integration endpoints
 `POST /webhooks/stripe` Send payment event notifications (Stripe via webhook)

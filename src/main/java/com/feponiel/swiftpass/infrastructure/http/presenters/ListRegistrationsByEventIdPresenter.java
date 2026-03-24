@@ -22,6 +22,7 @@ public class ListRegistrationsByEventIdPresenter {
           registration.getHolderName(),
           registration.getPaymentStatus(),
           registration.getCheckoutUrl(),
+          registration.getStripeSessionId(),
           registration.getTotalPaid(),
           registration.getPaidCurrency(),
           registration.getCreatedAt(),
