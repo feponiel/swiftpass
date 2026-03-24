@@ -14,6 +14,7 @@
 
 #### Events & Tickets
 `POST /events` Create a new event  
+`POST /events/:eventId/cancel` Cancel a specific event  
 `GET /events` List all events  
 `GET /events/:eventId` Get a specific event  
 `PATCH /events/:eventId` Edit a specific event  

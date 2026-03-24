@@ -2,8 +2,10 @@ package com.feponiel.swiftpass.infrastructure.services;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.feponiel.swiftpass.domain.application.boundaries.CheckoutItemData;
@@ -122,6 +124,38 @@ public class StripeServiceImpl implements StripeService {
     } catch (StripeException error) {
       throw new RuntimeException("Failed to process partial refund for payment intent: " + paymentIntentId, error);
     }
+  }
+
+  @Async
+  public CompletableFuture<Void> expireSessionsInBatch(List<String> stripeSessionIds) {
+    stripeSessionIds.parallelStream().forEach(sessionId -> {
+      try {
+        Session.retrieve(sessionId).expire();
+      } catch (StripeException error) {
+        throw new RuntimeException("Failed to expire session: " + sessionId, error);
+      }
+    });
+
+    return CompletableFuture.completedFuture(null);
+  }
+
+  @Async
+  public CompletableFuture<Void> processRefundsInBatch(List<String> stripeSessionIds) {
+    stripeSessionIds.parallelStream().forEach(sessionId -> {
+      try {
+        Session session = Session.retrieve(sessionId);
+
+        RefundCreateParams params = RefundCreateParams.builder()
+          .setPaymentIntent(session.getPaymentIntent())
+          .build();
+
+        Refund.create(params);
+      } catch (StripeException error) {
+        throw new RuntimeException("Failed to process refund for session: " + sessionId, error);
+      }
+    });
+
+    return CompletableFuture.completedFuture(null);
   }
 
   public void endSession(String stripeSessionId) {

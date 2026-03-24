@@ -15,5 +15,6 @@ public interface RegistrationsRepository {
   List<Registration> listAllByEventIdAndPaymentStatus(UUID eventId, PaymentStatus paymentStatus);
   Integer countConfirmedByTicketId(UUID ticketId);
   void update(Registration registration);
+  void updateFromPaidToRefundedByEventId(UUID eventId);
   void deleteById(UUID id);
 }

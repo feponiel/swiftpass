@@ -102,6 +102,16 @@ public class JPARegistrationsRepository implements RegistrationsRepository {
   }
 
   @Override
+  public void updateFromPaidToRefundedByEventId(UUID eventId) {
+    this.entityManager
+      .createQuery("UPDATE JPARegistration registration SET registration.paymentStatus = :refunded WHERE registration.paymentStatus = :paid AND registration.eventId = :eventId")
+      .setParameter("refunded", PaymentStatus.REFUNDED)
+      .setParameter("paid", PaymentStatus.PAID)
+      .setParameter("eventId", eventId)
+      .executeUpdate();
+  }
+
+  @Override
   public void deleteById(UUID id) {
     this.entityManager
       .createQuery("DELETE JPARegistration registration WHERE registration.id = :id")
