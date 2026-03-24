@@ -88,13 +88,15 @@ public class JPARegistrationsRepository implements RegistrationsRepository {
   @Override
   public void update(Registration registration) {
     this.entityManager
-      .createQuery("UPDATE JPARegistration registration SET registration.holderName = :holderName, registration.paymentStatus = :paymentStatus, registration.checkoutUrl = :checkoutUrl, registration.stripeSessionId = :stripeSessionId, registration.totalPaid = :totalPaid, registration.paidCurrency = :paidCurrency WHERE registration.id = :id")
+      .createQuery("UPDATE JPARegistration registration SET registration.holderName = :holderName, registration.paymentStatus = :paymentStatus, registration.checkoutUrl = :checkoutUrl, registration.stripeSessionId = :stripeSessionId, registration.totalPaid = :totalPaid, registration.paidCurrency = :paidCurrency, registration.updatedAt = :updatedAt, registration.editedAt = :editedAt WHERE registration.id = :id")
       .setParameter("holderName", registration.getHolderName())
       .setParameter("paymentStatus", registration.getPaymentStatus())
       .setParameter("checkoutUrl", registration.getCheckoutUrl())
       .setParameter("stripeSessionId", registration.getStripeSessionId())
       .setParameter("totalPaid", registration.getTotalPaid())
       .setParameter("paidCurrency", registration.getPaidCurrency())
+      .setParameter("updatedAt", registration.getUpdatedAt())
+      .setParameter("editedAt", registration.getEditedAt())
       .setParameter("id", registration.getId())
       .executeUpdate();
   }
