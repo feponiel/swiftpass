@@ -106,6 +106,24 @@ public class StripeServiceImpl implements StripeService {
     }
   }
 
+  public void processPartialRefund(String stripeSessionId, BigDecimal amountToRefund) {
+    String paymentIntentId = null;
+
+    try {
+      Session session = Session.retrieve(stripeSessionId);
+      paymentIntentId = session.getPaymentIntent();
+
+      RefundCreateParams refundParams = RefundCreateParams.builder()
+        .setPaymentIntent(paymentIntentId)
+        .setAmount(amountToRefund.multiply(BigDecimal.valueOf(100)).longValue())
+        .build();
+
+      Refund.create(refundParams);
+    } catch (StripeException error) {
+      throw new RuntimeException("Failed to process partial refund for payment intent: " + paymentIntentId, error);
+    }
+  }
+
   public void endSession(String stripeSessionId) {
     try {
       Session session = Session.retrieve(stripeSessionId);
