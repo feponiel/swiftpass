@@ -5,9 +5,10 @@
 
 ### Client-facing endpoints
 
-#### Profile, Account & Auth
+#### Users, Profile, Account & Auth
 `GET /oauth2/authorization/google` Redirect you to Google login page  
 `POST /logout` End your current session  
+`POST /users/:userId/promote` Promote an user to organizer  
 `GET /me` Get your profile info  
 `PATCH /me` Edit your profile info  
 `DELETE /me` Delete your account  
