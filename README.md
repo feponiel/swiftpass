@@ -9,6 +9,7 @@
 `GET /oauth2/authorization/google` Redirect you to Google login page  
 `POST /logout` End your current session  
 `POST /users/:userId/promote` Promote an user to organizer  
+`POST /users/:userId/demote` Demote an organizer to user  
 `GET /me` Get your profile info  
 `PATCH /me` Edit your profile info  
 `DELETE /me` Delete your account  
