@@ -16,13 +16,13 @@ public class DomainExceptionMapper {
     Map.entry(DomainExceptionCode.EVENT_NOT_FOUND, new ExceptionMeta(404, "/errors/event-not-found")),
     Map.entry(DomainExceptionCode.EVENT_SALES_CLOSED, new ExceptionMeta(409, "/errors/event-sales-closed")),
     Map.entry(DomainExceptionCode.INVALID_CURRENCY, new ExceptionMeta(422, "/errors/invalid-currency")),
-    Map.entry(DomainExceptionCode.INVALID_STRIPE_WEBHOOK, new ExceptionMeta(400, "errors/invalid-stripe-webhook")),
-    Map.entry(DomainExceptionCode.NO_FIELD_PROVIDED, new ExceptionMeta(400, "errors/no-field-provided")),
-    Map.entry(DomainExceptionCode.REGISTRATION_NOT_FOUND, new ExceptionMeta(404, "errors/registration-not-found")),
-    Map.entry(DomainExceptionCode.REGISTRATION_NOT_PAID, new ExceptionMeta(409, "errors/registration-not-paid")),
-    Map.entry(DomainExceptionCode.STRIPE_EVENT_DESERIALIZATION_FAILED, new ExceptionMeta(400, "errors/stripe-event-deserialization-failed")),
-    Map.entry(DomainExceptionCode.TICKET_NOT_FOUND, new ExceptionMeta(404, "errors/ticket-not-found")),
-    Map.entry(DomainExceptionCode.USER_NOT_FOUND, new ExceptionMeta(404, "errors/user-not-found"))
+    Map.entry(DomainExceptionCode.INVALID_STRIPE_WEBHOOK, new ExceptionMeta(400, "/errors/invalid-stripe-webhook")),
+    Map.entry(DomainExceptionCode.NO_FIELD_PROVIDED, new ExceptionMeta(400, "/errors/no-field-provided")),
+    Map.entry(DomainExceptionCode.REGISTRATION_NOT_FOUND, new ExceptionMeta(404, "/errors/registration-not-found")),
+    Map.entry(DomainExceptionCode.REGISTRATION_NOT_PAID, new ExceptionMeta(409, "/errors/registration-not-paid")),
+    Map.entry(DomainExceptionCode.STRIPE_EVENT_DESERIALIZATION_FAILED, new ExceptionMeta(400, "/errors/stripe-event-deserialization-failed")),
+    Map.entry(DomainExceptionCode.TICKET_NOT_FOUND, new ExceptionMeta(404, "/errors/ticket-not-found")),
+    Map.entry(DomainExceptionCode.USER_NOT_FOUND, new ExceptionMeta(404, "/errors/user-not-found"))
   );
 
   public ExceptionMeta resolve(DomainException exception) {
