@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.feponiel.swiftpass.domain.application.usecases.CreateRegistrationsUseCase;
 import com.feponiel.swiftpass.domain.business.entities.Registration;
+import com.feponiel.swiftpass.infrastructure.http.mappers.RegistrationItemsListMapper;
 import com.feponiel.swiftpass.infrastructure.http.payloads.CreateRegistrationsPayload;
 import com.feponiel.swiftpass.infrastructure.http.presenters.CreateRegistrationsPresenter;
 import com.feponiel.swiftpass.infrastructure.http.presenters.dtos.RegistrationListHTTPResponseModel;
 import com.feponiel.swiftpass.infrastructure.http.utils.AuthenticatedUserInfoExtractor;
-import com.feponiel.swiftpass.infrastructure.mappers.RegistrationItemsListMapper;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

@@ -10,7 +10,7 @@ import com.feponiel.swiftpass.domain.application.repositories.RegistrationsRepos
 import com.feponiel.swiftpass.domain.business.entities.Registration;
 import com.feponiel.swiftpass.domain.business.valueobjects.PaymentStatus;
 import com.feponiel.swiftpass.infrastructure.database.entities.JPARegistration;
-import com.feponiel.swiftpass.infrastructure.mappers.RegistrationMapper;
+import com.feponiel.swiftpass.infrastructure.database.mappers.RegistrationMapper;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

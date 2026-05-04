@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.feponiel.swiftpass.domain.application.repositories.UsersRepository;
 import com.feponiel.swiftpass.domain.business.entities.User;
 import com.feponiel.swiftpass.infrastructure.database.entities.JPAUser;
-import com.feponiel.swiftpass.infrastructure.mappers.UserMapper;
+import com.feponiel.swiftpass.infrastructure.database.mappers.UserMapper;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

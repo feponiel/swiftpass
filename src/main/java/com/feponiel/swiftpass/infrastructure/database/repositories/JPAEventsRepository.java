@@ -11,7 +11,7 @@ import com.feponiel.swiftpass.domain.application.repositories.EventsRepository;
 import com.feponiel.swiftpass.domain.business.entities.Event;
 import com.feponiel.swiftpass.domain.business.valueobjects.Address;
 import com.feponiel.swiftpass.infrastructure.database.entities.JPAEvent;
-import com.feponiel.swiftpass.infrastructure.mappers.EventMapper;
+import com.feponiel.swiftpass.infrastructure.database.mappers.EventMapper;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

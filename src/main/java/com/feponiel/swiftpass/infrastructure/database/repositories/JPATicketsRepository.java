@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.feponiel.swiftpass.domain.application.repositories.TicketsRepository;
 import com.feponiel.swiftpass.domain.business.entities.Ticket;
 import com.feponiel.swiftpass.infrastructure.database.entities.JPATicket;
-import com.feponiel.swiftpass.infrastructure.mappers.TicketMapper;
+import com.feponiel.swiftpass.infrastructure.database.mappers.TicketMapper;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.LockModeType;

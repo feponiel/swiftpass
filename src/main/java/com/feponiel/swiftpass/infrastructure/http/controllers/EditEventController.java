@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.feponiel.swiftpass.domain.application.usecases.EditEventUseCase;
+import com.feponiel.swiftpass.infrastructure.http.mappers.EventAddressMapper;
 import com.feponiel.swiftpass.infrastructure.http.payloads.EditEventPayload;
-import com.feponiel.swiftpass.infrastructure.mappers.EventAddressMapper;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
