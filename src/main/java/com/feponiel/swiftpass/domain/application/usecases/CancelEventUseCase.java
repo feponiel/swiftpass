@@ -51,6 +51,18 @@ public class CancelEventUseCase {
 
     CompletableFuture.allOf(expireFuture, refundFuture).join();
 
+    // PENDING registrations are not updated here intentionally.
+    // When Stripe expires the sessions, it fires "checkout.session.expired" webhooks
+    // which are handled by ProcessStripeCheckoutEventUseCase, updating them to EXPIRED.
+    //
+    // PAID registrations are updated synchronously here via updateFromPaidToRefundedByEventId
+    // instead of relying on the "charge.refunded" webhook. This is because "charge.refunded"
+    // is also fired for individual refunds (RefundRegistrationUseCase), and does not distinguish
+    // between partial and full refunds, handling it in the webhook would require checking the
+    // refunded amount against the total, and would still risk marking all registrations from the
+    // same session as REFUNDED even when only one was partially refunded. To avoid these edge
+    // cases, the bulk update is done synchronously here, and the webhook is not used for this.
+
     this.registrationsRepository.updateFromPaidToRefundedByEventId(eventId);
   }
 }
