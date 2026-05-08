@@ -3,6 +3,7 @@ package com.feponiel.swiftpass.domain.business.entities;
 import java.time.Instant;
 import java.util.UUID;
 
+import com.feponiel.swiftpass.domain.application.usecases.exceptions.EventEndDateBeforeStartDateException;
 import com.feponiel.swiftpass.domain.business.valueobjects.Address;
 
 import lombok.Builder;
@@ -41,6 +42,10 @@ public class Event extends Entity {
     Instant editedAt
   ) {
     super(id);
+
+    if(endDate.isBefore(startDate)) {
+      throw new EventEndDateBeforeStartDateException();
+    }
 
     this.hostId = hostId;
     this.name = name;
@@ -136,6 +141,10 @@ public class Event extends Entity {
   public Event changeStartDate(Instant newStartDate) {
     if (newStartDate == null)
       return this;
+    
+    if(endDate.isBefore(newStartDate)) {
+      throw new EventEndDateBeforeStartDateException();
+    }
 
     this.startDate = newStartDate;
 
@@ -147,6 +156,10 @@ public class Event extends Entity {
   public Event changeEndDate(Instant newEndDate) {
     if (newEndDate == null)
       return this;
+
+    if(newEndDate.isBefore(startDate)) {
+      throw new EventEndDateBeforeStartDateException();
+    }
 
     this.endDate = newEndDate;
 
