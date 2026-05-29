@@ -119,7 +119,7 @@ class CancelEventTest {
   }
 
   @Test
-  void shouldNotCancelAnEventThatDoesNotExists() {
+  void shouldNotCancelAnEventThatDoesNotExist() {
     UUID randomId = UUID.randomUUID();
 
     when(eventsRepository.findById(randomId)).thenReturn(Optional.empty());

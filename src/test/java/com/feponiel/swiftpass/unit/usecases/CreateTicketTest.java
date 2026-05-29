@@ -65,7 +65,7 @@ public class CreateTicketTest {
   }
 
   @Test
-  void shouldNotCreateTicketWhenEventDoesNotExists() {
+  void shouldNotCreateTicketWhenEventDoesNotExist() {
     Ticket ticket = TicketFactory.make();
 
     when(eventsRepository.findById(ticket.getEventId())).thenReturn(Optional.empty());
