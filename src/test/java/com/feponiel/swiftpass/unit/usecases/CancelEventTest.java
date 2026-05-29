@@ -25,6 +25,7 @@ import com.feponiel.swiftpass.domain.application.usecases.CancelEventUseCase;
 import com.feponiel.swiftpass.domain.application.usecases.exceptions.EventNotFoundException;
 import com.feponiel.swiftpass.domain.business.entities.Event;
 import com.feponiel.swiftpass.domain.business.entities.Registration;
+import com.feponiel.swiftpass.domain.business.valueobjects.EventStatus;
 import com.feponiel.swiftpass.domain.business.valueobjects.PaymentStatus;
 import com.feponiel.swiftpass.factories.EventFactory;
 import com.feponiel.swiftpass.factories.RegistrationFactory;
@@ -37,7 +38,7 @@ class CancelEventTest {
   @InjectMocks
   private CancelEventUseCase cancelEventUseCase;
 
-  AutoCloseable mocks;
+  private AutoCloseable mocks;
 
   @BeforeEach
   void setup() {
@@ -50,7 +51,7 @@ class CancelEventTest {
   }
 
   @Test
-  void shouldCloseEventSalesWhenItsCanceled() {
+  void shouldMarkEventAsCanceledAndCloseItsSales() {
     Event event = EventFactory.make();
 
     when(eventsRepository.findById(event.getId())).thenReturn(Optional.of(event));
@@ -64,6 +65,7 @@ class CancelEventTest {
     verify(eventsRepository, times(1)).update(captor.capture());
 
     Event updatedEvent = captor.getValue();
+    assertThat(updatedEvent.getStatus()).isEqualTo(EventStatus.CANCELED);
     assertThat(updatedEvent.getSalesOpen()).isFalse();
   }
 

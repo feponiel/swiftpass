@@ -32,6 +32,7 @@ public class EventFactory {
           .addressLine1(faker.address().streetAddress())
           .build()
         )
+      .salesOpen(true)
       .startDate(startDate)
       .endDate(startDate.plusSeconds(faker.number().numberBetween(3600, 18000)));
 
