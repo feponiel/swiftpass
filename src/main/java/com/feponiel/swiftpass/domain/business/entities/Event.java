@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.feponiel.swiftpass.domain.application.usecases.exceptions.EventEndDateBeforeStartDateException;
 import com.feponiel.swiftpass.domain.business.valueobjects.Address;
+import com.feponiel.swiftpass.domain.business.valueobjects.EventStatus;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -19,6 +20,7 @@ public class Event extends Entity {
   private Integer ageRange;
   private Boolean salesOpen;
   private Address address;
+  private EventStatus status;
   private Instant startDate;
   private Instant endDate;
   private Instant createdAt;
@@ -35,6 +37,7 @@ public class Event extends Entity {
     @NonNull Integer ageRange,
     Boolean salesOpen,
     @NonNull Address address,
+    EventStatus status,
     @NonNull Instant startDate,
     @NonNull Instant endDate,
     Instant createdAt,
@@ -54,6 +57,7 @@ public class Event extends Entity {
     this.ageRange = ageRange;
     this.salesOpen = salesOpen != null ? salesOpen : false;
     this.address = address;
+    this.status = status != null ? status : EventStatus.ACTIVE;
     this.startDate = startDate;
     this.endDate = endDate;
     this.createdAt = createdAt != null ? createdAt : Instant.now();
@@ -136,6 +140,11 @@ public class Event extends Entity {
     this.markEdited();
 
     return this;
+  }
+
+  public void cancel() {
+    this.status = EventStatus.CANCELED;
+    this.closeSales();
   }
 
   public Event changeStartDate(Instant newStartDate) {

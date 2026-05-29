@@ -27,7 +27,7 @@ public class CancelEventUseCase {
     Event event = this.eventsRepository.findById(eventId)
       .orElseThrow(EventNotFoundException::new);
 
-    event.closeSales();
+    event.cancel();
     this.eventsRepository.update(event);
 
     List<Registration> pendingRegistrations = this.registrationsRepository

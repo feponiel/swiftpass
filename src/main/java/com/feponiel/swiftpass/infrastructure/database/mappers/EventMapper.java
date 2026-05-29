@@ -27,6 +27,7 @@ public class EventMapper {
       .ageRange(rawEvent.getAgeRange())
       .salesOpen(rawEvent.getSalesOpen())
       .address(eventAddressLocation)
+      .status(rawEvent.getStatus())
       .startDate(rawEvent.getStartDate())
       .endDate(rawEvent.getEndDate())
       .createdAt(rawEvent.getCreatedAt())
@@ -50,6 +51,7 @@ public class EventMapper {
       rawEvent.getAddress().getCity(),
       rawEvent.getAddress().getAddressLine1(),
       rawEvent.getAddress().getAddressLine2(),
+      rawEvent.getStatus(),
       rawEvent.getStartDate(),
       rawEvent.getEndDate(),
       rawEvent.getCreatedAt(),

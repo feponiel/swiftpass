@@ -56,7 +56,7 @@ public class JPAEventsRepository implements EventsRepository {
     Address eventAddress = event.getAddress();
 
     this.entityManager
-      .createQuery("UPDATE JPAEvent event SET event.name = :name, event.description = :description, event.bannerUrl = :bannerUrl, event.ageRange = :ageRange, event.salesOpen = :salesOpen, event.postalCode = :postalCode, event.country = :country, event.state = :state, event.city = :city, event.addressLine1 = :addressLine1, event.addressLine2 = :addressLine2, event.startDate = :startDate, event.endDate = :endDate, event.updatedAt = :updatedAt, event.editedAt = :editedAt WHERE event.id = :id")
+      .createQuery("UPDATE JPAEvent event SET event.name = :name, event.description = :description, event.bannerUrl = :bannerUrl, event.ageRange = :ageRange, event.salesOpen = :salesOpen, event.postalCode = :postalCode, event.country = :country, event.state = :state, event.city = :city, event.addressLine1 = :addressLine1, event.addressLine2 = :addressLine2, event.status = :status, event.startDate = :startDate, event.endDate = :endDate, event.updatedAt = :updatedAt, event.editedAt = :editedAt WHERE event.id = :id")
       .setParameter("name", event.getName())
       .setParameter("description", event.getDescription())
       .setParameter("bannerUrl", event.getBannerUrl())
@@ -68,6 +68,7 @@ public class JPAEventsRepository implements EventsRepository {
       .setParameter("city", eventAddress.getCity())
       .setParameter("addressLine1", eventAddress.getAddressLine1())
       .setParameter("addressLine2", eventAddress.getAddressLine2())
+      .setParameter("status", event.getStatus())
       .setParameter("startDate", event.getStartDate())
       .setParameter("endDate", event.getEndDate())
       .setParameter("updatedAt", event.getUpdatedAt())

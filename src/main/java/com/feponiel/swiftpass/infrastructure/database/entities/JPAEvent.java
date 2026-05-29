@@ -3,8 +3,12 @@ package com.feponiel.swiftpass.infrastructure.database.entities;
 import java.time.Instant;
 import java.util.UUID;
 
+import com.feponiel.swiftpass.domain.business.valueobjects.EventStatus;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -56,6 +60,10 @@ public class JPAEvent {
 
   @Column(name="address_line2")
   private String addressLine2;
+
+  @Column(name="status", nullable = false)
+  @Enumerated(EnumType.STRING)
+  private EventStatus status;
 
   @Column(name="start_date", nullable = false)
   private Instant startDate;
