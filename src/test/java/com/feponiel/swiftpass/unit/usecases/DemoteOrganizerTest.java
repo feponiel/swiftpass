@@ -66,6 +66,6 @@ public class DemoteOrganizerTest {
 
     assertThrows(UserNotFoundException.class, () -> demoteOrganizerUseCase.execute(randomId));
 
-    verify(usersRepository, never()).update(any(User.class));
+    verify(usersRepository, never()).update(any());
   }
 }

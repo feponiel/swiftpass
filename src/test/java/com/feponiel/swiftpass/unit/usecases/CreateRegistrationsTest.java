@@ -28,7 +28,6 @@ import com.feponiel.swiftpass.domain.application.usecases.exceptions.EventNotFou
 import com.feponiel.swiftpass.domain.application.usecases.exceptions.EventSalesClosedException;
 import com.feponiel.swiftpass.domain.application.usecases.exceptions.TicketNotFoundException;
 import com.feponiel.swiftpass.domain.business.entities.Event;
-import com.feponiel.swiftpass.domain.business.entities.Registration;
 import com.feponiel.swiftpass.domain.business.entities.Ticket;
 import com.feponiel.swiftpass.factories.EventFactory;
 import com.feponiel.swiftpass.factories.TicketFactory;
@@ -66,8 +65,8 @@ class CreateRegistrationsTest {
 
     createRegistrationsUseCase.execute(UUID.randomUUID(), List.of(item));
 
-    verify(registrationsRepository, times(1)).create(any(Registration.class));
-    verify(registrationsRepository, times(1)).update(any(Registration.class));
+    verify(registrationsRepository, times(1)).create(any());
+    verify(registrationsRepository, times(1)).update(any());
   }
 
   @Test
