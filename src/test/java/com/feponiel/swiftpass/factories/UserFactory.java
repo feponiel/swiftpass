@@ -17,7 +17,7 @@ public class UserFactory {
   public static User make(Consumer<User.UserBuilder> overrides) {
     var builder = User.builder()
       .id(UUID.randomUUID())
-      .providerId(faker.options().option("google", "github"))
+      .providerId("google")
       .name(faker.name().fullName())
       .email(faker.internet().emailAddress())
       .pictureUrl("https://picsum.photos/300");
