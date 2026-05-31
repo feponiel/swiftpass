@@ -15,8 +15,8 @@ import lombok.RequiredArgsConstructor;
 public class GetTicketByIdUseCase {
   private final TicketsRepository ticketsRepository;
 
-  public Ticket execute(UUID tickedId) {
-    return this.ticketsRepository.findById(tickedId)
+  public Ticket execute(UUID ticketId) {
+    return this.ticketsRepository.findById(ticketId)
       .orElseThrow(TicketNotFoundException::new);
   }
 }
