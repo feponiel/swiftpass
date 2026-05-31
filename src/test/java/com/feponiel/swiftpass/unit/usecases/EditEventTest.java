@@ -1,5 +1,6 @@
 package com.feponiel.swiftpass.unit.usecases;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
@@ -13,6 +14,7 @@ import java.util.UUID;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -51,7 +53,10 @@ public class EditEventTest {
 
     editEventUseCase.execute(event.getId(), "New Event Name", null, null, null, null, null, null);
 
-    verify(eventsRepository, times(1)).update(any());
+    ArgumentCaptor<Event> captor = ArgumentCaptor.captor();
+    verify(eventsRepository, times(1)).update(captor.capture());
+
+    assertThat(captor.getValue().getName()).isEqualTo("New Event Name");
   }
 
   @Test
