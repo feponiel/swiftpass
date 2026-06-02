@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class PromoteUserToOrganizerUseCase {
-  private UsersRepository usersRepository;
+  private final UsersRepository usersRepository;
 
   public void execute(UUID userToPromoteId) {
     User userToPromote = this.usersRepository.findById(userToPromoteId)

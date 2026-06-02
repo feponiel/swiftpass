@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class DemoteOrganizerUseCase {
-  private UsersRepository usersRepository;
+  private final UsersRepository usersRepository;
 
   public void execute(UUID organizerToDemoteId) {
     User organizerToDemote = this.usersRepository.findById(organizerToDemoteId)
