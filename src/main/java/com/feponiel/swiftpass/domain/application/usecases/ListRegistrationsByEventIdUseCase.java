@@ -17,6 +17,10 @@ public class ListRegistrationsByEventIdUseCase {
   private final RegistrationsRepository registrationsRepository;
 
   public List<Registration> execute(UUID eventId, PaymentStatus paymentStatus) {
+    // The existence of the eventId is intentionally not verified here, because even if an event is deleted,
+    // the application preserves its registrations for fiscal purposes, so if it becomes necessary to
+    // access these registrations, the event organizer will still be able to do so.
+
     return this.registrationsRepository.listAllByEventIdAndPaymentStatus(eventId, paymentStatus);
   }
 }
