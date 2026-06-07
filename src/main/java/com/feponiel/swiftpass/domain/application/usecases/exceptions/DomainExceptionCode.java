@@ -1,6 +1,7 @@
 package com.feponiel.swiftpass.domain.application.usecases.exceptions;
 
 public enum DomainExceptionCode {
+  ACTIVE_EVENT_DELETION_NOT_ALLOWED,
   EVENT_END_DATE_BEFORE_START_DATE,
   EVENT_ALREADY_ENDED,
   EVENT_NOT_FOUND,

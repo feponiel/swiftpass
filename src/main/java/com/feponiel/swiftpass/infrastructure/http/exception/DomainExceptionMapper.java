@@ -12,6 +12,7 @@ public class DomainExceptionMapper {
   public record ExceptionMeta(int status, String typeURI) {}
 
   private static final Map<DomainExceptionCode, ExceptionMeta> META = Map.ofEntries(
+    Map.entry(DomainExceptionCode.ACTIVE_EVENT_DELETION_NOT_ALLOWED, new ExceptionMeta(409, "/errors/active-event-deletion-not-allowed")),
     Map.entry(DomainExceptionCode.EVENT_END_DATE_BEFORE_START_DATE, new ExceptionMeta(409, "/errors/event-end-date-before-start-date")),
     Map.entry(DomainExceptionCode.EVENT_ALREADY_ENDED, new ExceptionMeta(409, "/errors/event-already-ended")),
     Map.entry(DomainExceptionCode.EVENT_NOT_FOUND, new ExceptionMeta(404, "/errors/event-not-found")),
