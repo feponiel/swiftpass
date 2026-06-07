@@ -7,36 +7,22 @@ import static org.mockito.Mockito.when;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import com.feponiel.swiftpass.domain.application.repositories.RegistrationsRepository;
 import com.feponiel.swiftpass.domain.application.usecases.GetRegistrationByIdUseCase;
 import com.feponiel.swiftpass.domain.application.usecases.exceptions.RegistrationNotFoundException;
 import com.feponiel.swiftpass.domain.business.entities.Registration;
 import com.feponiel.swiftpass.factories.RegistrationFactory;
+import com.feponiel.swiftpass.unit.UnitTest;
 
-public class GetRegistrationByIdTest {
+public class GetRegistrationByIdTest extends UnitTest {
   @Mock private RegistrationsRepository registrationsRepository;
 
   @InjectMocks
   private GetRegistrationByIdUseCase getRegistrationByIdUseCase;
-
-  private AutoCloseable mocks;
-
-  @BeforeEach
-  void setup() {
-    mocks = MockitoAnnotations.openMocks(this);
-  }
-
-  @AfterEach
-  void tearDown() throws Exception {
-    mocks.close();
-  }
 
   @Test
   void shouldGetRegistrationById() {

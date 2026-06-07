@@ -10,35 +10,21 @@ import static org.mockito.Mockito.when;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import com.feponiel.swiftpass.domain.application.repositories.UsersRepository;
 import com.feponiel.swiftpass.domain.application.usecases.FindOrCreateUserByGoogleUseCase;
 import com.feponiel.swiftpass.domain.business.entities.User;
 import com.feponiel.swiftpass.factories.UserFactory;
+import com.feponiel.swiftpass.unit.UnitTest;
 
-public class FindOrCreateUserByGoogleTest {
+public class FindOrCreateUserByGoogleTest extends UnitTest {
   @Mock private UsersRepository usersRepository;
 
   @InjectMocks
   private FindOrCreateUserByGoogleUseCase findOrCreateUserByGoogleUseCase;
-
-  private AutoCloseable mocks;
-
-  @BeforeEach
-  void setup() {
-    mocks = MockitoAnnotations.openMocks(this);
-  }
-
-  @AfterEach
-  void tearDown() throws Exception {
-    mocks.close();
-  }
 
   @Test
   void shouldCreateUserWhenIdDoesNotExist() {

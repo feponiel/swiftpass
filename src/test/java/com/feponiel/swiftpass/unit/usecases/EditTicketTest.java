@@ -11,13 +11,10 @@ import static org.mockito.Mockito.when;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import com.feponiel.swiftpass.domain.application.repositories.TicketsRepository;
 import com.feponiel.swiftpass.domain.application.usecases.EditTicketUseCase;
@@ -26,24 +23,13 @@ import com.feponiel.swiftpass.domain.application.usecases.exceptions.NoFieldProv
 import com.feponiel.swiftpass.domain.application.usecases.exceptions.TicketNotFoundException;
 import com.feponiel.swiftpass.domain.business.entities.Ticket;
 import com.feponiel.swiftpass.factories.TicketFactory;
+import com.feponiel.swiftpass.unit.UnitTest;
 
-public class EditTicketTest {
+public class EditTicketTest extends UnitTest {
   @Mock private TicketsRepository ticketsRepository;
 
   @InjectMocks
   private EditTicketUseCase editTicketUseCase;
-
-  private AutoCloseable mocks;
-
-  @BeforeEach
-  void setup() {
-    mocks = MockitoAnnotations.openMocks(this);
-  }
-
-  @AfterEach()
-  void tearDown() throws Exception {
-    mocks.close();
-  }
 
   @Test
   void shouldEditTicket() {

@@ -12,13 +12,10 @@ import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import com.feponiel.swiftpass.domain.application.repositories.RegistrationsRepository;
 import com.feponiel.swiftpass.domain.application.services.StripeService;
@@ -28,25 +25,14 @@ import com.feponiel.swiftpass.domain.application.usecases.exceptions.Registratio
 import com.feponiel.swiftpass.domain.business.entities.Registration;
 import com.feponiel.swiftpass.domain.business.valueobjects.PaymentStatus;
 import com.feponiel.swiftpass.factories.RegistrationFactory;
+import com.feponiel.swiftpass.unit.UnitTest;
 
-public class RefundRegistrationTest {
+public class RefundRegistrationTest extends UnitTest {
   @Mock private RegistrationsRepository registrationsRepository;
   @Mock private StripeService stripeService;
 
   @InjectMocks
   private RefundRegistrationUseCase refundRegistrationUseCase;
-
-  private AutoCloseable mocks;
-
-  @BeforeEach
-  void setup() {
-    mocks = MockitoAnnotations.openMocks(this);
-  }
-
-  @AfterEach
-  void tearDown() throws Exception {
-    mocks.close();
-  }
 
   @Test
   void shouldRefundRegistration() {

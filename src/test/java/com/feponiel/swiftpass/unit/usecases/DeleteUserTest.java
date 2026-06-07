@@ -10,12 +10,9 @@ import static org.mockito.Mockito.when;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.context.ApplicationEventPublisher;
 
 import com.feponiel.swiftpass.domain.application.repositories.UsersRepository;
@@ -25,25 +22,14 @@ import com.feponiel.swiftpass.domain.business.entities.User;
 import com.feponiel.swiftpass.domain.business.events.UserDeletedEvent;
 import com.feponiel.swiftpass.domain.business.valueobjects.Role;
 import com.feponiel.swiftpass.factories.UserFactory;
+import com.feponiel.swiftpass.unit.UnitTest;
 
-public class DeleteUserTest {
+public class DeleteUserTest extends UnitTest {
   @Mock private UsersRepository usersRepository;
   @Mock private ApplicationEventPublisher eventPublisher;
 
   @InjectMocks
   private DeleteUserUseCase deleteUserUseCase;
-
-  private AutoCloseable mocks;
-
-  @BeforeEach
-  void setup() {
-    mocks = MockitoAnnotations.openMocks(this);
-  }
-
-  @AfterEach()
-  void tearDown() throws Exception {
-    mocks.close();
-  }
 
   @Test
   void shouldDeleteUser() {

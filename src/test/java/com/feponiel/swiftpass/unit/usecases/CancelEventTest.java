@@ -10,13 +10,10 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import com.feponiel.swiftpass.domain.application.repositories.EventsRepository;
 import com.feponiel.swiftpass.domain.application.repositories.RegistrationsRepository;
@@ -29,26 +26,15 @@ import com.feponiel.swiftpass.domain.business.valueobjects.EventStatus;
 import com.feponiel.swiftpass.domain.business.valueobjects.PaymentStatus;
 import com.feponiel.swiftpass.factories.EventFactory;
 import com.feponiel.swiftpass.factories.RegistrationFactory;
+import com.feponiel.swiftpass.unit.UnitTest;
 
-class CancelEventTest {
+class CancelEventTest extends UnitTest {
   @Mock private RegistrationsRepository registrationsRepository;
   @Mock private EventsRepository eventsRepository;
   @Mock private StripeService stripeService;
 
   @InjectMocks
   private CancelEventUseCase cancelEventUseCase;
-
-  private AutoCloseable mocks;
-
-  @BeforeEach
-  void setup() {
-    mocks = MockitoAnnotations.openMocks(this);
-  }
-
-  @AfterEach
-  void tearDown() throws Exception {
-    mocks.close();
-  }
 
   @Test
   void shouldMarkEventAsCanceledAndCloseItsSales() {

@@ -6,12 +6,9 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 import java.util.UUID;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import com.feponiel.swiftpass.domain.application.repositories.RegistrationsRepository;
 import com.feponiel.swiftpass.domain.application.usecases.ListRegistrationsByEventIdUseCase;
@@ -20,24 +17,13 @@ import com.feponiel.swiftpass.domain.business.entities.Registration;
 import com.feponiel.swiftpass.domain.business.valueobjects.PaymentStatus;
 import com.feponiel.swiftpass.factories.EventFactory;
 import com.feponiel.swiftpass.factories.RegistrationFactory;
+import com.feponiel.swiftpass.unit.UnitTest;
 
-public class ListRegistrationsByEventIdTest {
+public class ListRegistrationsByEventIdTest extends UnitTest {
   @Mock private RegistrationsRepository registrationsRepository;
 
   @InjectMocks
   private ListRegistrationsByEventIdUseCase listRegistrationsByEventId;
-
-  private AutoCloseable mocks;
-
-  @BeforeEach
-  void setup() {
-    mocks = MockitoAnnotations.openMocks(this);
-  }
-
-  @AfterEach
-  void tearDown() throws Exception {
-    mocks.close();
-  }
 
   @Test
   void shoudListRegistrationsByEventId() {

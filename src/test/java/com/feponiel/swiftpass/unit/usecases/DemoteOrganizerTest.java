@@ -11,13 +11,10 @@ import static org.mockito.Mockito.when;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import com.feponiel.swiftpass.domain.application.repositories.UsersRepository;
 import com.feponiel.swiftpass.domain.application.usecases.DemoteOrganizerUseCase;
@@ -25,24 +22,13 @@ import com.feponiel.swiftpass.domain.application.usecases.exceptions.UserNotFoun
 import com.feponiel.swiftpass.domain.business.entities.User;
 import com.feponiel.swiftpass.domain.business.valueobjects.Role;
 import com.feponiel.swiftpass.factories.UserFactory;
+import com.feponiel.swiftpass.unit.UnitTest;
 
-public class DemoteOrganizerTest {
+public class DemoteOrganizerTest extends UnitTest {
   @Mock private UsersRepository usersRepository;
 
   @InjectMocks
   private DemoteOrganizerUseCase demoteOrganizerUseCase;
-
-  private AutoCloseable mocks;
-
-  @BeforeEach()
-  void setup() {
-    mocks = MockitoAnnotations.openMocks(this);
-  }
-
-  @AfterEach
-  void tearDown() throws Exception {
-    mocks.close();
-  }
 
   @Test
   void shouldDemoteOrganizer() {

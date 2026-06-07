@@ -12,13 +12,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.context.ApplicationEventPublisher;
 
 import com.feponiel.swiftpass.domain.application.boundaries.StripeCheckoutEventData;
@@ -33,8 +30,9 @@ import com.feponiel.swiftpass.domain.business.events.TicketOverbookedEvent;
 import com.feponiel.swiftpass.domain.business.valueobjects.PaymentStatus;
 import com.feponiel.swiftpass.factories.RegistrationFactory;
 import com.feponiel.swiftpass.factories.TicketFactory;
+import com.feponiel.swiftpass.unit.UnitTest;
 
-public class ProcessStripeCheckoutEventTest {
+public class ProcessStripeCheckoutEventTest extends UnitTest {
 
   @Mock private RegistrationsRepository registrationsRepository;
   @Mock private TicketsRepository ticketsRepository;
@@ -43,18 +41,6 @@ public class ProcessStripeCheckoutEventTest {
 
   @InjectMocks
   private ProcessStripeCheckoutEventUseCase processStripeCheckoutEventUseCase;
-
-  private AutoCloseable mocks;
-
-  @BeforeEach
-  void setup() {
-    mocks = MockitoAnnotations.openMocks(this);
-  }
-
-  @AfterEach
-  void tearDown() throws Exception {
-    mocks.close();
-  }
 
   // helpers ---------------------------------------------------------------------------------------------------------
 

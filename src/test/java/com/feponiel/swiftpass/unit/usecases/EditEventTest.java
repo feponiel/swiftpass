@@ -11,13 +11,10 @@ import static org.mockito.Mockito.when;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import com.feponiel.swiftpass.domain.application.boundaries.EventAddressData;
 import com.feponiel.swiftpass.domain.application.repositories.EventsRepository;
@@ -26,24 +23,13 @@ import com.feponiel.swiftpass.domain.application.usecases.exceptions.EventNotFou
 import com.feponiel.swiftpass.domain.application.usecases.exceptions.NoFieldProvidedToEditException;
 import com.feponiel.swiftpass.domain.business.entities.Event;
 import com.feponiel.swiftpass.factories.EventFactory;
+import com.feponiel.swiftpass.unit.UnitTest;
 
-public class EditEventTest {
+public class EditEventTest extends UnitTest {
   @Mock private EventsRepository eventsRepository;
 
   @InjectMocks
   private EditEventUseCase editEventUseCase;
-
-  private AutoCloseable mocks;
-
-  @BeforeEach
-  void setup() {
-    mocks = MockitoAnnotations.openMocks(this);
-  }
-
-  @AfterEach
-  void tearDown() throws Exception {
-    mocks.close();
-  }
 
   @Test
   void shouldEditEvent() {

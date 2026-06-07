@@ -6,36 +6,22 @@ import static org.mockito.Mockito.verify;
 
 import java.time.Instant;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import com.feponiel.swiftpass.domain.application.repositories.EventsRepository;
 import com.feponiel.swiftpass.domain.application.usecases.CreateEventUseCase;
 import com.feponiel.swiftpass.domain.application.usecases.exceptions.EventEndDateBeforeStartDateException;
 import com.feponiel.swiftpass.domain.business.entities.Event;
 import com.feponiel.swiftpass.factories.EventFactory;
+import com.feponiel.swiftpass.unit.UnitTest;
 
-public class CreateEventTest {
+public class CreateEventTest extends UnitTest {
   @Mock private EventsRepository eventsRepository;
 
   @InjectMocks
   private CreateEventUseCase createEventUseCase;
-
-  private AutoCloseable mocks;
-
-  @BeforeEach
-  void setup() {
-    mocks = MockitoAnnotations.openMocks(this);
-  }
-
-  @AfterEach
-  void tearDown() throws Exception {
-    mocks.close();
-  }
 
   @Test
   void shouldCreateEvent() {

@@ -7,36 +7,22 @@ import static org.mockito.Mockito.when;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import com.feponiel.swiftpass.domain.application.repositories.EventsRepository;
 import com.feponiel.swiftpass.domain.application.usecases.GetEventByIdUseCase;
 import com.feponiel.swiftpass.domain.application.usecases.exceptions.EventNotFoundException;
 import com.feponiel.swiftpass.domain.business.entities.Event;
 import com.feponiel.swiftpass.factories.EventFactory;
+import com.feponiel.swiftpass.unit.UnitTest;
 
-public class GetEventByIdTest {
+public class GetEventByIdTest extends UnitTest {
   @Mock private EventsRepository eventsRepository;
 
   @InjectMocks
   private GetEventByIdUseCase getEventByIdUseCase;
-
-  private AutoCloseable mocks;
-
-  @BeforeEach
-  void setup() {
-    mocks = MockitoAnnotations.openMocks(this);
-  }
-
-  @AfterEach
-  void tearDown() throws Exception {
-    mocks.close();
-  }
 
   @Test
   void shouldGetEventById() {
