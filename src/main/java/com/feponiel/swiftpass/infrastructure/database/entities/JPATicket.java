@@ -34,7 +34,7 @@ public class JPATicket {
   @Column(name = "price", nullable = false, precision = 10, scale = 2)
   private BigDecimal price;
 
-  @Column(name = "currency", nullable = false, columnDefinition = "CHAR(3)")
+  @Column(name = "currency", nullable = false, columnDefinition = "VARCHAR(3)")
   private String currency;
 
   @Column(name = "capacity", nullable = false)

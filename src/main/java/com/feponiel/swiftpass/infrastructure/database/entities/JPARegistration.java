@@ -51,7 +51,7 @@ public class JPARegistration {
   @Column(name = "total_paid", precision = 10, scale = 2)
   private BigDecimal totalPaid;
 
-  @Column(name = "paid_currency", columnDefinition = "CHAR(3)")
+  @Column(name = "paid_currency", columnDefinition = "VARCHAR(3)")
   private String paidCurrency;
 
   @Column(name = "created_at", nullable = false)
