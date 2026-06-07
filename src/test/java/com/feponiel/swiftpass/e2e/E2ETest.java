@@ -18,7 +18,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 public abstract class E2ETest {
   @Container
   @SuppressWarnings("resource")
-  static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16")
+  static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:18")
     .withDatabaseName("swiftpass_test")
     .withUsername("test")
     .withPassword("test");
