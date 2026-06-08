@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -44,6 +45,23 @@ public class GlobalExceptionHandler {
 
     return ResponseEntity
       .status(exceptionMeta.status())
+      .contentType(MediaType.APPLICATION_PROBLEM_JSON)
+      .body(problem);
+  }
+
+  @ExceptionHandler(AccessDeniedException.class)
+  public ResponseEntity<ProblemDetail> handleAccessDenied(AccessDeniedException exception, HttpServletRequest request) {
+    var problem = ProblemDetail.forStatusAndDetail(
+      HttpStatusCode.valueOf(403),
+      "You don't have permission to access this resource!"
+    );
+
+    problem.setType(URI.create("/errors/forbidden"));
+    problem.setTitle(HttpStatus.valueOf(403).getReasonPhrase());
+    problem.setInstance(URI.create(request.getRequestURI()));
+    problem.setProperty("timestamp", Instant.now());
+
+    return ResponseEntity.status(403)
       .contentType(MediaType.APPLICATION_PROBLEM_JSON)
       .body(problem);
   }

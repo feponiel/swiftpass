@@ -12,6 +12,8 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.feponiel.swiftpass.infrastructure.security.services.CustomOAuth2UserService;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(securedEnabled = true)
@@ -26,6 +28,7 @@ public class SecurityConfig {
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
       .csrf(csrf -> csrf.disable())
+      .exceptionHandling(exceptions -> exceptions .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED)) )
       .authorizeHttpRequests(auth -> auth
         .requestMatchers("/login", "/error").permitAll()
         .requestMatchers(HttpMethod.GET, "/events", "/events/*").permitAll()
