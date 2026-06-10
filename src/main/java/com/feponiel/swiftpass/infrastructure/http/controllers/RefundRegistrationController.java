@@ -9,21 +9,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.feponiel.swiftpass.domain.application.usecases.CancelEventUseCase;
+import com.feponiel.swiftpass.domain.application.usecases.RefundRegistrationUseCase;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @Secured("ROLE_ORGANIZER")
-@RequestMapping("/events/{eventId}/cancel")
+@RequestMapping("/registrations/{registrationId}/refund")
 @RequiredArgsConstructor
-public class CancelEvent {
-  private final CancelEventUseCase cancelEventUseCase;
+public class RefundRegistrationController {
+  private final RefundRegistrationUseCase refundRegistrationUseCase;
 
   @PostMapping
-  public ResponseEntity<Void> handle(@PathVariable UUID eventId) {
-    this.cancelEventUseCase.execute(eventId);
+  public ResponseEntity<Void> handle(@PathVariable UUID registrationId) {
+    this.refundRegistrationUseCase.execute(registrationId);
 
-    return ResponseEntity.ok().build();
+    return ResponseEntity.noContent().build();
   }
 }

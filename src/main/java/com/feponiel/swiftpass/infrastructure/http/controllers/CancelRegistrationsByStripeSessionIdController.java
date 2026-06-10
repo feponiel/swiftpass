@@ -1,28 +1,24 @@
 package com.feponiel.swiftpass.infrastructure.http.controllers;
 
-import java.util.UUID;
-
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.feponiel.swiftpass.domain.application.usecases.RefundRegistrationUseCase;
+import com.feponiel.swiftpass.domain.application.usecases.CancelRegistrationsByStripeSessionIdUseCase;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@Secured("ROLE_ORGANIZER")
-@RequestMapping("/registrations/{registrationId}/refund")
+@RequestMapping("/checkout-sessions/{stripeSessionId}/cancel")
 @RequiredArgsConstructor
-public class RefundRegistration {
-  private final RefundRegistrationUseCase refundRegistrationUseCase;
+public class CancelRegistrationsByStripeSessionIdController {
+  private final CancelRegistrationsByStripeSessionIdUseCase cancelRegistrationsByStripeSessionIdUseCase;
 
   @PostMapping
-  public ResponseEntity<Void> handle(@PathVariable UUID registrationId) {
-    this.refundRegistrationUseCase.execute(registrationId);
+  public ResponseEntity<Void> handle(@PathVariable String stripeSessionId) {
+    this.cancelRegistrationsByStripeSessionIdUseCase.execute(stripeSessionId);
 
     return ResponseEntity.noContent().build();
   }

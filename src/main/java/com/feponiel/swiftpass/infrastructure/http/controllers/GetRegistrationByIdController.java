@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/registrations/{registrationId}")
 @RequiredArgsConstructor
-public class GetRegistrationById {
+public class GetRegistrationByIdController {
   private final GetRegistrationByIdUseCase getRegistrationByIdUseCase;
 
   @GetMapping

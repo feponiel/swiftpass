@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/events/{eventId}/registrations")
 @RequiredArgsConstructor
-public class ListRegistrationsByEventId {
+public class ListRegistrationsByEventIdController {
   private final ListRegistrationsByEventIdUseCase listRegistrationsByEventIdUseCase;
 
   @GetMapping
