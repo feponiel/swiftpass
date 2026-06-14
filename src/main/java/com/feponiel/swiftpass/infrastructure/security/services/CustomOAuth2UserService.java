@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.feponiel.swiftpass.domain.application.usecases.FindOrCreateUserByGoogleUseCase;
 import com.feponiel.swiftpass.domain.business.entities.User;
+import com.feponiel.swiftpass.domain.business.valueobjects.Role;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,6 +25,9 @@ import lombok.RequiredArgsConstructor;
 public class CustomOAuth2UserService implements OAuth2UserService<OidcUserRequest, OidcUser> {
   private final FindOrCreateUserByGoogleUseCase findOrCreateUserByGoogleUseCase;
   private final OidcUserService delegate = new OidcUserService();
+
+  @Value("${spring.profiles.active}")
+  private String profile;
 
   @Override
   public OidcUser loadUser(OidcUserRequest request) {
@@ -35,17 +40,19 @@ public class CustomOAuth2UserService implements OAuth2UserService<OidcUserReques
 
     User user = this.findOrCreateUserByGoogleUseCase.execute(providerId, name, email, pictureUrl);
 
+    Role userRole = profile.equals("demo") ? Role.ORGANIZER : user.getRole();
+
     Map<String, Object> attributes = new HashMap<>(oidcUser.getAttributes());
     attributes.put("id", user.getId());
     attributes.put("name", user.getName());
     attributes.put("picture", user.getPictureUrl());
-    attributes.put("role", user.getRole().name());
+    attributes.put("role", userRole.name());
     attributes.put("createdAt", user.getCreatedAt());
     attributes.put("updatedAt", user.getUpdatedAt());
     attributes.put("editedAt", user.getEditedAt());
 
     List<GrantedAuthority> authorities = List.of(
-      new SimpleGrantedAuthority("ROLE_" + user.getRole())
+      new SimpleGrantedAuthority("ROLE_" + userRole)
     );
 
     return new DefaultOidcUser(authorities, oidcUser.getIdToken(), oidcUser.getUserInfo(), "sub") {

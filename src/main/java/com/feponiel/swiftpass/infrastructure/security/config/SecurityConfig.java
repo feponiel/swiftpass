@@ -30,7 +30,7 @@ public class SecurityConfig {
       .csrf(csrf -> csrf.disable())
       .exceptionHandling(exceptions -> exceptions .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED)) )
       .authorizeHttpRequests(auth -> auth
-        .requestMatchers("/login", "/error").permitAll()
+        .requestMatchers("/login", "/error", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
         .requestMatchers(HttpMethod.GET, "/events", "/events/*").permitAll()
         .requestMatchers(HttpMethod.POST, "/webhooks/stripe").permitAll()
         .anyRequest().authenticated()
