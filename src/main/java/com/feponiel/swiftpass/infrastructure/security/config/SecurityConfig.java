@@ -28,7 +28,9 @@ public class SecurityConfig {
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
       .csrf(csrf -> csrf.disable())
-      .exceptionHandling(exceptions -> exceptions .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED)) )
+      .exceptionHandling(exceptions -> exceptions
+        .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
+      )
       .authorizeHttpRequests(auth -> auth
         .requestMatchers("/login", "/error", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
         .requestMatchers(HttpMethod.GET, "/events", "/events/*").permitAll()
@@ -40,7 +42,10 @@ public class SecurityConfig {
           .oidcUserService(customOAuth2UserService)
         )
         .defaultSuccessUrl(frontEndUrl, true)
-        .failureUrl(frontEndUrl + "/login?error")
+        .failureHandler((request, response, exception) -> {
+          exception.printStackTrace();
+          response.sendRedirect(frontEndUrl + "/login?error");
+        })
       )
       .logout(logout -> logout
         .logoutUrl("/logout")
