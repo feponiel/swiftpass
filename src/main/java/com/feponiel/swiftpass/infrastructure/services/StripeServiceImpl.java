@@ -39,6 +39,9 @@ public class StripeServiceImpl implements StripeService {
   @Value("${application.front-end-url}")
   private String frontEndUrl;
 
+  @Value("${spring.profiles.active}")
+  private String profile;
+
   public CheckoutSessionData createCheckoutSession(List<CheckoutItemData> checkoutItemsList) {
     Stripe.apiKey = stripeSecretKey;
 
@@ -66,8 +69,8 @@ public class StripeServiceImpl implements StripeService {
 
       SessionCreateParams params = SessionCreateParams.builder()
         .setMode(SessionCreateParams.Mode.PAYMENT)
-        .setSuccessUrl(frontEndUrl + "/checkout/success")
-        .setCancelUrl(frontEndUrl + "/checkout/cancel")
+        .setSuccessUrl(profile.equals("demo") ? frontEndUrl : frontEndUrl + "/checkout/success")
+        .setCancelUrl(profile.equals("demo") ? frontEndUrl : frontEndUrl + "/checkout/cancel")
         .addAllLineItem(lineItems)
         .build();
 
